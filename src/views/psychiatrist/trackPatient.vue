@@ -304,7 +304,7 @@ export default {
         this.labels[i] = i + 1;
         this.datasets1[0].data[i] = this.responses[i].time_completion;
         this.datasets[0].data[i] =
-          this.responses[i].q9 +
+          this.responses[i].q0 +
           this.responses[i].q1 +
           this.responses[i].q2 +
           this.responses[i].q3 +
