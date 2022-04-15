@@ -1,0 +1,84 @@
+%resetList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+%resetButton {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: normal;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+}
+
+$mediaMax: 1600px;
+$mediaQHD: 1440px;
+$mediaHD: 1280px;
+$mediaBig: 1140px;
+$mediaDesktop: 960px;
+$mediaTablet: 768px;
+$mediaPhablet: 600px;
+$mediaSmart: 480px;
+$mediaPhone: 380px;
+
+@mixin display($media) {
+  @if $media == qhd {
+    @media screen and (min-width: $mediaQHD) { @content; }
+  }
+  @else if $media == hd {
+    @media screen and (min-width: $mediaHD) { @content; }
+  }
+  @else if $media == big {
+    @media screen and (min-width: $mediaBig) { @content; }
+  }
+  @else if $media == desktop {
+    @media screen and (min-width: $mediaDesktop) { @content; }
+  }
+  @else if $media == tablet {
+    @media screen and (min-width: $mediaTablet) { @content; }
+  }
+  @else if $media == phablet {
+    @media screen and (min-width: $mediaPhablet) { @content; }
+  }
+  @else if $media == smart {
+    @media screen and (min-width: $mediaSmart) { @content; }
+  }
+  @else if $media == phone {
+    @media screen and (min-width: $mediaPhone) { @content; }
+  }
+}
+
+@mixin display-less($media) {
+  @if $media == qhd {
+    @media screen and (max-width: $mediaQHD) { @content; }
+  }
+  @else if $media == hd {
+    @media screen and (max-width: $mediaHD) { @content; }
+  }
+  @else if $media == big {
+    @media screen and (max-width: $mediaBig) { @content; }
+  }
+  @else if $media == desktop {
+    @media screen and (max-width: $mediaDesktop) { @content; }
+  }
+  @else if $media == tablet {
+    @media screen and (max-width: $mediaTablet) { @content; }
+  }
+  @else if $media == phablet {
+    @media screen and (max-width: $mediaPhablet) { @content; }
+  }
+  @else if $media == smart {
+    @media screen and (max-width: $mediaSmart) { @content; }
+  }
+  @else if $media == phone {
+    @media screen and (max-width: $mediaPhone) { @content; }
+  }
+}
