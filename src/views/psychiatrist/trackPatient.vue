@@ -1,9 +1,12 @@
 <template>
   <div class="home">
     <sidebar-menu :menu="menu" :collapsed="true" />
-    <h1>Track Patient</h1>
+    <h1 :style="{ color: 'purple' }">Track Patient</h1>
+    <div class="namebox">
+      <input type="text" placeholder="Email" v-model="email" />
+    </div>
 
-    <div class="form__group field">
+    <!-- <div class="form__group field">
       <input
         v-model="email"
         type="input"
@@ -14,7 +17,7 @@
         required
       />
       <label for="name" class="form__label">Email</label>
-    </div>
+    </div> -->
     <!-- <div class="form__group field">
       <input
         v-model="name"
@@ -85,6 +88,7 @@
       </button>
 
       <div v-show="toggled[index]" class="box">
+        <ve-table :columns="columns" :table-data="responses" />
         <line-chart
           :labels="labels"
           :datasets="datasets"
@@ -95,9 +99,9 @@
           :datasets="datasets1"
           :options="options1"
         ></line-chart>
+
         <div v-for="(response, index) in responses" :key="index">
           <!-- {{ response }} -->
-          <!-- <Portfolio :value="response"></Portfolio> -->
         </div>
       </div>
     </div>
@@ -124,6 +128,22 @@ export default {
   },
   data() {
     return {
+      columns: [
+        { field: "email", key: "a", title: "Email", align: "center"},
+        { field: "q0", key: "b", title: "Q1", align: "center" },
+        { field: "q1", key: "c", title: "Q2", align: "center" },
+        { field: "q2", key: "d", title: "Q3", align: "center" },
+        { field: "q3", key: "e", title: "Q4", align: "center" },
+        { field: "q4", key: "f", title: "Q5", align: "center" },
+        { field: "q5", key: "g", title: "Q6", align: "center" },
+        { field: "q6", key: "h", title: "Q7", align: "center" },
+        { field: "q7", key: "i", title: "Q8", align: "center" },
+        { field: "q8", key: "j", title: "Q9", align: "center" },
+        { field: "time_completion", key: "k", title: "Time Completion", align: "center" },
+        { field: "datestamp", key: "l", title: "Datestamp", align: "center" },
+        { field: "timestamp", key: "m", title: "Timestamp", align: "center" },
+      ],
+
       series: [
         {
           name: null,
@@ -556,6 +576,29 @@ $gray: #9b9b9b;
 }
 
 .box {
-  width: 500px;
+  width: 800px;
+}
+
+input[type="text"] {
+  width: 300px;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+}
+
+input[type="text"]:focus {
+  border-color: dodgerBlue;
+  box-shadow: 0 0 8px 0 dodgerBlue;
+}
+
+.namebox {
+  // width: 280px;
+  // height: 50px;
+  margin-top: 10px;
 }
 </style>

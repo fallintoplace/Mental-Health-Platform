@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <sidebar-menu :menu="menu" :collapsed="true" />
-    <h2>Personal Information</h2>
+    <h2  :style="{ color: 'purple' }">Personal Information</h2>
     <div>Email: {{ this.menu[0].title }}</div>
     <br />
     Name: {{ name }} {{ surname }}

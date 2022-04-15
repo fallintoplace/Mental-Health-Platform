@@ -14,6 +14,11 @@ import Skeleton from "vue-loading-skeleton";
 import VueSidebarMenu from "vue-sidebar-menu";
 import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 
+import "vue-easytable/libs/theme-default/index.css"; // import style
+import VueEasytable from "vue-easytable"; // import library
+
+
+
 
 /* import the fontawesome core */
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -38,6 +43,7 @@ Vue.use(ToggleSwitch);
 Vue.use(Trend);
 Vue.use(Skeleton);
 Vue.use(VueSidebarMenu);
+Vue.use(VueEasytable);
 
 Vue.config.productionTip = false;
 Vue.component("apexchart", VueApexCharts);
