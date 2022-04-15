@@ -29,6 +29,7 @@
     "vue-apexcharts": "^1.6.2",
     "vue-burger-menu": "^2.0.5",
     "vue-chartjs": "^3.5.1",
+    "vue-easytable": "^2.16.2",
     "vue-loading-skeleton": "^1.1.9",
     "vue-map-chart": "^0.0.2",
     "vue-material-design-icons": "^5.0.0",
