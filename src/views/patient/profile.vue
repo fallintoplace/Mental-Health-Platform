@@ -4,8 +4,13 @@
     <h2>Personal Information</h2>
     <div>Email: {{ this.menu[0].title }}</div>
     <br />
-    Gender: {{ selectedGender }}
+    Name: {{ name }} {{ surname }}
+    <div class="namebox">
+      <input type="text" placeholder="Name" v-model="newName" />
+      <input type="text" placeholder="Surname" v-model="newSurname" />
+    </div>
 
+    Gender: {{ selectedGender }}
     <label class="select" for="slct">
       <select id="slct" required="required" v-model="newGender">
         <option value="null" disabled="disabled" selected="selected" hidden>
@@ -24,9 +29,7 @@
         <polyline points="1 1 5 5 9 1"></polyline>
       </symbol>
     </svg>
-    <label for="dateofbirth">
-      Date Of Birth: {{ selectedDOB }}
-    </label>
+    <label for="dateofbirth"> Date Of Birth: {{ selectedDOB }} </label>
     <input
       type="date"
       id="dateofbirth"
@@ -70,6 +73,10 @@ export default {
       selectedDOB: null,
       newGender: null,
       patients: null,
+      name: null,
+      surname: null,
+      newName: null,
+      newSurname: null,
       saveMessage: "Save",
       menu: [
         {
@@ -106,12 +113,15 @@ export default {
       // eslint-disable-next-line no-unused-vars
       const { data, error } = await supabase
         .from("patients")
-        .select("gender, date_of_birth")
+        .select("*")
         .like("email", "%" + this.getEmail + "%");
-      // console.table(data);
+      console.table(data);
       // console.log(data[0].gender);
       if (data[0].gender) this.selectedGender = data[0].gender;
-      if (data[0].date_of_birth) this.selectedDOB = moment(data[0].date_of_birth).format("DD/MM/YYYY");
+      if (data[0].date_of_birth)
+        this.selectedDOB = moment(data[0].date_of_birth).format("DD/MM/YYYY");
+      if (data[0].name) this.name = data[0].name;
+      if (data[0].surname) this.surname = data[0].surname;
     },
     async updateGender() {
       if (this.newGender) {
@@ -127,6 +137,20 @@ export default {
         const { data, error } = await supabase
           .from("patients")
           .update({ date_of_birth: this.dateOfBirth })
+          .match({ email: this.getEmail });
+      }
+      if (this.newName) {
+        // eslint-disable-next-line no-unused-vars
+        const { data, error } = await supabase
+          .from("patients")
+          .update({ name: this.newName })
+          .match({ email: this.getEmail });
+      }
+      if (this.newSurname) {
+        // eslint-disable-next-line no-unused-vars
+        const { data, error } = await supabase
+          .from("patients")
+          .update({ surname: this.newSurname })
           .match({ email: this.getEmail });
       }
     },
@@ -262,5 +286,28 @@ export default {
 .button-3:active {
   background-color: #298e46;
   box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
+}
+
+input[type="text"] {
+  width: 100%;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  margin-left: 4px;
+  margin-bottom: 4px;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  font-family: "Roboto", sans-serif;
+}
+
+input[type="text"]:focus {
+  border-color: dodgerBlue;
+  box-shadow: 0 0 8px 0 dodgerBlue;
+}
+
+.namebox {
+  display: flex;
+  width: 280px;
 }
 </style>

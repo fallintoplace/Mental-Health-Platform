@@ -234,13 +234,6 @@ $block: ".home";
   flex-direction: column;
 }
 
-input {
-  font-size: 1em;
-  padding: 5px 0;
-  margin: 10px 0 5px 0;
-  width: 100%;
-}
-
 button {
   background-color: #ffffff;
   border: 1px solid rgb(209, 213, 219);
@@ -278,6 +271,13 @@ button:focus-visible {
   box-shadow: none;
 }
 
+// input {
+//   font-size: 1em;
+//   padding: 5px 0;
+//   margin: 10px 0 5px 0;
+//   width: 100%;
+// }
+
 $primary: #11998e;
 $secondary: #38ef7d;
 $white: #fff;
@@ -285,24 +285,25 @@ $gray: #9b9b9b;
 .form__group {
   caret-color: black;
   position: relative;
-  padding: 15px 0 0;
-  margin-top: 10px;
-  width: 100%;
+  padding: 20px 0 0;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 300px;
+  
 }
 
 .form__field {
-  font-family: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Roboto", sans-serif;
   width: 100%;
   border: 0;
   border-bottom: 2px solid $gray;
   outline: 0;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: black;
   padding: 7px 0;
   background: transparent;
   transition: border-color 0.2s;
+  
 
   &::placeholder {
     color: transparent;
@@ -333,12 +334,15 @@ $gray: #9b9b9b;
     font-size: 1rem;
     color: $primary;
     font-weight: 700;
+
   }
+
   padding-bottom: 6px;
   font-weight: 700;
   border-width: 3px;
   border-image: linear-gradient(to right, $primary, $secondary);
   border-image-slice: 1;
+
 }
 /* reset input */
 .form__field {
@@ -361,4 +365,7 @@ $gray: #9b9b9b;
     rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
     rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 }
+
+
+
 </style>
