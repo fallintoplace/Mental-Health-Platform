@@ -112,11 +112,11 @@ export default {
           title: "Track Patient",
           icon: "fas fa-user",
         },
-        // {
-        //   href: "/comparePatient",
-        //   title: "Compare Patient",
-        //   icon: "fas fa-user-friends",
-        // },
+        {
+          href: "/comparePatients",
+          title: "Compare Patients",
+          icon: "fas fa-user-friends",
+        },
         {
           href: "/",
           title: "Log Out",

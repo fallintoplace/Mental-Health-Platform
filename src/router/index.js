@@ -26,9 +26,9 @@ const routes = [
     component: () => import("@/views/psychiatrist/overviewPatient"),
   },
   {
-    path: "/comparePatient",
-    name: "comparePatient",
-    component: () => import("@/views/psychiatrist/comparePatient"),
+    path: "/comparePatients",
+    name: "comparePatients",
+    component: () => import("@/views/psychiatrist/comparePatients"),
   },
   {
     path: "/trackPatient",

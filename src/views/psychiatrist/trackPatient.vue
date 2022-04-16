@@ -139,6 +139,7 @@ export default {
         { field: "q6", key: "h", title: "Q7", align: "center" },
         { field: "q7", key: "i", title: "Q8", align: "center" },
         { field: "q8", key: "j", title: "Q9", align: "center" },
+        { field: "total_score", key: "n", title: "Score", align: "center" },
         { field: "time_completion", key: "k", title: "Time Completion", align: "center" },
         { field: "datestamp", key: "l", title: "Datestamp", align: "center" },
         { field: "timestamp", key: "m", title: "Timestamp", align: "center" },
@@ -219,11 +220,11 @@ export default {
           title: "Track Patient",
           icon: "fas fa-user",
         },
-        // {
-        //   href: "/comparePatient",
-        //   title: "Compare Patient",
-        //   icon: "fas fa-user-friends",
-        // },
+        {
+          href: "/comparePatients",
+          title: "Compare Patients",
+          icon: "fas fa-user-friends",
+        },
         {
           href: "/",
           title: "Log Out",
@@ -576,7 +577,7 @@ $gray: #9b9b9b;
 }
 
 .box {
-  width: 800px;
+  width: 850px;
 }
 
 input[type="text"] {
