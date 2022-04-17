@@ -85,9 +85,14 @@ export default {
           hiddenOnCollapse: true,
         },
         {
-          href: "/StartPage",
-          title: "Start Questionnaire",
+          href: "/PHQ9",
+          title: "Start PHQ9",
           icon: "fas fa-copy",
+        },
+        {
+          href: "/GAD7",
+          title: "Start GAD7",
+          icon: "far fa-copy",
         },
         {
           href: "/profile",

@@ -37,7 +37,7 @@
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import * as TYPES from "@/store/modules/questionnaire/types";
 import Feed from "@/components/shared/Feed";
-import Question from "@/components/shared/Question";
+import Question from "@/components/shared/Question1";
 import Keyboard from "@/components/shared/Keyboard";
 import Stepper from "@/components/shared/Stepper";
 

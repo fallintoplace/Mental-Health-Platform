@@ -93,13 +93,16 @@ const mutations = {
 };
 
 const actions = {
-  async fetchQuestionnaire({ commit, state }) {
+  async fetchQuestionnaire({ commit, state }, payload) {
     if (state.questionnaire) {
       // return;
     }
 
     try {
-      const { data } = await axios.get("/api/questionnaire.json");
+      // alert(payload);
+      const { data } = await axios.get(
+        //"/api/questionnaire.json"
+        payload);
       if (!data || !data.questionnaire || data.questionnaire.length === 0) {
         return;
       }

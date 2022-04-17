@@ -1,7 +1,7 @@
 <template>
   <router-link
     v-if="value"
-    :to="`startPHQ9`"
+    :to="`startGAD7`"
     class="card"
   >
     <!-- <img :src="`/uploads/1.png`" alt="" class="card__icon" /> -->

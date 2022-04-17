@@ -75,7 +75,7 @@
           <label for="name" class="form__label">Password</label>
         </div> -->
 
-        <router-link to="/StartPage">
+        <router-link to="/PHQ9">
           <button
             @click="
               submitForm;
@@ -86,7 +86,7 @@
           </button>
         </router-link>
         <h3>Or</h3>
-        <router-link to="/StartPage">
+        <router-link to="/PHQ9">
           <button
             @click="
               submitForm;
@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import * as TYPES from "@/store/modules/questionnaire/types";
 
 export default {
@@ -188,7 +188,7 @@ export default {
   },
 
   mounted() {
-    this.fetchQuestionnaire();
+    // this.fetchQuestionnaire();
   },
 
   computed: {
@@ -210,7 +210,7 @@ export default {
     ...mapMutations(["setEmail"]),
 
     submitForm() {},
-    ...mapActions("questionnaire", ["fetchQuestionnaire"]),
+    // ...mapActions("questionnaire", ["fetchQuestionnaire"]),
   },
 
   // metaInfo() {
