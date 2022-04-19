@@ -8,8 +8,6 @@
       :current="activeQuestionIndex + 1"
     />
 
-    <!-- <vue-ellipse-progress :progress="10" :color="gradient"/> -->
-
     <feed
       v-if="slides"
       :can-navigate="
@@ -55,21 +53,6 @@ export default {
 
   data() {
     return {
-      gradient: {
-        radial: false,
-        colors: [
-          {
-            color: '#6546f7',
-            offset: 0,
-            opacity: '1',
-          },
-          {
-            color: 'lime',
-            offset: 100,
-            opacity: '0.6',
-          },
-        ]
-      },
       menu: [
         {
           header: true,

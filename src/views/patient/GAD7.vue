@@ -84,6 +84,11 @@ export default {
           icon: "fas fa-user-cog",
         },
         {
+          href: "/result",
+          title: "Show Result",
+          icon: "fas fa-poll-h",
+        },
+        {
           href: "/",
           title: "Exit",
           icon: "fas fa-sign-out-alt",

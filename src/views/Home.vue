@@ -80,6 +80,7 @@
             @click="
               submitForm;
               setEmail(patient.username ? patient.username : guestEmail);
+              resetData();
             "
           >
             Enter
@@ -91,6 +92,7 @@
             @click="
               submitForm;
               setEmail(guestEmail);
+              resetData();
             "
           >
             Enter as Guest
@@ -208,6 +210,7 @@ export default {
 
   methods: {
     ...mapMutations(["setEmail"]),
+    ...mapMutations(["resetData"]),
 
     submitForm() {},
     // ...mapActions("questionnaire", ["fetchQuestionnaire"]),

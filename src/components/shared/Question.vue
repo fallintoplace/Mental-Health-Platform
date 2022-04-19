@@ -20,7 +20,7 @@
             <div>Device: {{ getDevice }}</div>
             <div>Location: {{ getLocation }}</div>
             <p></p>
-            <router-link to="/">
+            <router-link to="/result">
               <!-- <button class="button-33" role="button" @click="uploadResponse">Upload Response</button> -->
               <button
                 class="button-82-pushable"
