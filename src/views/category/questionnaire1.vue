@@ -87,7 +87,7 @@ export default {
   },
 
   mounted() {
-    this.fetchQuestionnaire();
+    // this.fetchQuestionnaire();
     this.fetchDeviceLocation();
     this.setDatestampTimestamp();
     this.resetData();

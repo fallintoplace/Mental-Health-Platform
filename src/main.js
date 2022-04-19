@@ -17,6 +17,8 @@ import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 import "vue-easytable/libs/theme-default/index.css"; // import style
 import VueEasytable from "vue-easytable"; // import library
 
+import VueEllipseProgress from 'vue-ellipse-progress';
+Vue.use(VueEllipseProgress);
 
 
 

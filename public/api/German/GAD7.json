@@ -1,0 +1,259 @@
+{
+  "questionnaire": {
+    "id": 41,
+    "identifier": "GAD7",
+    "name": "Gesundheitsfragebogen für Patienten (GAD-7)",
+    "questions": [
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_1",
+        "headline": "Nervosität, Ängstlichkeit oder Anspannung",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_2",
+        "headline": "Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_3",
+        "headline": "Übermäßige Sorgen bezüglich verschiedener Angelegenheiten",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_4",
+        "headline": "Schwierigkeiten zu entspannen",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_5",
+        "headline": "Rastlosigkeit, so dass Stillsitzen schwer fällt",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_6",
+        "headline": "Schnelle Verärgerung oder Gereiztheit",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_7",
+        "headline": "Gefühl der Angst, so als würde etwas Schlimmes passieren",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_8",
+        "headline": "Wenn Sie ein Problem angekreuzt haben, wie schwierig war es für Sie, Ihre Arbeit zu erledigen, sich um Dinge zu Hause zu kümmern oder mit anderen Menschen auszukommen?",
+        "description": "",
+        "required": false,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht schwierig",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "Ziemlich schwierig",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "Sehr schwierig",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Äußerst schwierig",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      }
+    ],
+    "description": "Prof. Dr. Bernd Löwe, 2015, Universitätsklinikum Hamburg-Eppendorf",
+    "category_name_hyphenated": "GAD7"
+  }
+}

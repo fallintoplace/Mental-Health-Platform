@@ -1,0 +1,321 @@
+{
+  "questionnaire": {
+    "id": 40,
+    "identifier": "PHQ9",
+    "name": "Gesundheitsfragebogen für Patienten (PHQ-9)",
+    "questions": [
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_1",
+        "headline": "Wenig Interesse oder Freude an Ihren Tätigkeiten",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_2",
+        "headline": "Niedergeschlagenheit, Schwermut oder Hoffnungslosigkeit",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_3",
+        "headline": "Schwierigkeiten ein- oder durchzuschlafen oder vermehrter Schlaf",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_4",
+        "headline": "Müdigkeit oder Gefühl, keine Energie zu haben",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_5",
+        "headline": "Verminderter Appetit oder übermäßiges Bedürfnis zu essen",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_6",
+        "headline": "Schlechte Meinung von sich selbst; Gefühl, ein Versager zu sein oder die Familie enttäuscht zu haben",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_7",
+        "headline": "Schwierigkeiten, sich auf etwas zu konzentrieren, z.B. beim Zeitunglesen oder Fernsehen",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_8",
+        "headline": "Waren Ihre Bewegungen oder Ihre Sprache so verlangsamt, dass es auch anderen auffallen würde? Oder waren Sie im Gegenteil „zappelig“ oder ruhelos und hatten dadurch einen stärkeren Bewegungsdrang als sonst?",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_9",
+        "headline": "Gedanken, dass Sie lieber tot wären oder sich Leid zufügen möchten",
+        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "required": true,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "An einzelnen Tagen",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "An mehr als der Hälfte der Tage",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Beinahe jeden Tag",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      },
+      {
+        "question_type": "multiple-choice",
+        "identifier": "list_10",
+        "headline": "Wenn Sie ein Problem angekreuzt haben, wie schwierig war es für Sie, Ihre Arbeit zu erledigen, sich um Dinge zu Hause zu kümmern oder mit anderen Menschen auszukommen?",
+        "description": "",
+        "required": false,
+        "multiple": "false",
+        "choices": [
+          {
+            "label": "Überhaupt nicht schwierig",
+            "value": "0",
+            "selected": false
+          },
+          {
+            "label": "Ziemlich schwierig",
+            "value": "1",
+            "selected": false
+          },
+          {
+            "label": "Sehr schwierig",
+            "value": "2",
+            "selected": false
+          },
+          {
+            "label": "Äußerst schwierig",
+            "value": "3",
+            "selected": false
+          }
+        ],
+        "jumps": []
+      }
+    ],
+    "description": "Deutsche Übersetzung und Validierung des «Brief Patient Health Questionnaire (Brief PHQ)» durch B. Löwe, S. Zipfel und W. Herzog, Medizinische Universitätsklinik Heidelberg. Englische Originalversion: Spitzer, Kroenke & Williams, 1999",
+    "category_name_hyphenated": "PHQ9"
+  }
+}

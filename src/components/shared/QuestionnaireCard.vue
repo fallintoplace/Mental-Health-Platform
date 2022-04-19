@@ -1,15 +1,10 @@
 <template>
-  <router-link
-    v-if="value"
-    :to="`startPHQ9`"
-    class="card"
-  >
+  <router-link v-if="value" :to="`startPHQ9`" class="card">
     <!-- <img :src="`/uploads/1.png`" alt="" class="card__icon" /> -->
     <div class="card__text">
       <h3 class="card__title">{{ value.name }}</h3>
       <p class="card__description">{{ value.description }}</p>
     </div>
-
     <div v-if="number" class="card__number">
       Number of questions: {{ number }}
     </div>

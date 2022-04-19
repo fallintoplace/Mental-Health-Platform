@@ -1,9 +1,5 @@
 <template>
-  <router-link
-    v-if="value"
-    :to="`startGAD7`"
-    class="card"
-  >
+  <router-link v-if="value" :to="`startGAD7`" class="card">
     <!-- <img :src="`/uploads/1.png`" alt="" class="card__icon" /> -->
     <div class="card__text">
       <h3 class="card__title">{{ value.name }}</h3>

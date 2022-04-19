@@ -8,6 +8,8 @@
       :current="activeQuestionIndex + 1"
     />
 
+    <!-- <vue-ellipse-progress :progress="10" :color="gradient"/> -->
+
     <feed
       v-if="slides"
       :can-navigate="
@@ -41,7 +43,6 @@ import Question from "@/components/shared/Question";
 import Keyboard from "@/components/shared/Keyboard";
 import Stepper from "@/components/shared/Stepper";
 
-
 export default {
   name: "QuestionnairePage",
 
@@ -54,6 +55,21 @@ export default {
 
   data() {
     return {
+      gradient: {
+        radial: false,
+        colors: [
+          {
+            color: '#6546f7',
+            offset: 0,
+            opacity: '1',
+          },
+          {
+            color: 'lime',
+            offset: 100,
+            opacity: '0.6',
+          },
+        ]
+      },
       menu: [
         {
           header: true,
@@ -87,7 +103,7 @@ export default {
   },
 
   mounted() {
-    this.fetchQuestionnaire();
+    // this.fetchQuestionnaire();
     this.fetchDeviceLocation();
     this.setDatestampTimestamp();
     this.resetData();
