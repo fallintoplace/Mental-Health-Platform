@@ -1,35 +1,40 @@
 {
   "questionnaire": {
-    "id": 40,
-    "identifier": "PHQ9",
-    "name": "Patient Health Questionnaire 9 (PHQ-9)",
+    "id": 50,
+    "identifier": "SUS",
+    "name": "System Usability Scale",
     "questions": [
       {
         "question_type": "multiple-choice",
         "identifier": "list_1",
-        "headline": "Wenig Interesse oder Freude an Ihren Tätigkeiten",
-        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "headline": "I think that I would like to use this website frequently.",
+        "description": "",
         "required": true,
         "multiple": "false",
         "choices": [
           {
-            "label": "Überhaupt nicht",
+            "label": "Strongly Disagree",
             "value": "0",
             "selected": false
           },
           {
-            "label": "An einzelnen Tagen",
+            "label": "",
             "value": "1",
             "selected": false
           },
           {
-            "label": "An mehr als der Hälfte der Tage",
+            "label": "",
             "value": "2",
             "selected": false
           },
           {
-            "label": "Beinahe jeden Tag",
+            "label": "",
             "value": "3",
+            "selected": false
+          },
+          {
+            "label": "Strongly Agree",
+            "value": "4",
             "selected": false
           }
         ],
@@ -38,29 +43,34 @@
       {
         "question_type": "multiple-choice",
         "identifier": "list_2",
-        "headline": "Niedergeschlagenheit, Schwermut oder Hoffnungslosigkeit",
-        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "headline": "I found this website unnecessarily complex",
+        "description": "",
         "required": true,
         "multiple": "false",
         "choices": [
           {
-            "label": "Überhaupt nicht",
+            "label": "Strongly Disagree",
             "value": "0",
             "selected": false
           },
           {
-            "label": "An einzelnen Tagen",
+            "label": "",
             "value": "1",
             "selected": false
           },
           {
-            "label": "An mehr als der Hälfte der Tage",
+            "label": "",
             "value": "2",
             "selected": false
           },
           {
-            "label": "Beinahe jeden Tag",
+            "label": "",
             "value": "3",
+            "selected": false
+          },
+          {
+            "label": "Strongly Agree",
+            "value": "4",
             "selected": false
           }
         ],
@@ -69,29 +79,34 @@
       {
         "question_type": "multiple-choice",
         "identifier": "list_3",
-        "headline": "Schwierigkeiten ein- oder durchzuschlafen oder vermehrter Schlaf",
-        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "headline": "I thought this website was easy to use",
+        "description": "",
         "required": true,
         "multiple": "false",
         "choices": [
           {
-            "label": "Überhaupt nicht",
+            "label": "Strongly Disagree",
             "value": "0",
             "selected": false
           },
           {
-            "label": "An einzelnen Tagen",
+            "label": "",
             "value": "1",
             "selected": false
           },
           {
-            "label": "An mehr als der Hälfte der Tage",
+            "label": "",
             "value": "2",
             "selected": false
           },
           {
-            "label": "Beinahe jeden Tag",
+            "label": "",
             "value": "3",
+            "selected": false
+          },
+          {
+            "label": "Strongly Agree",
+            "value": "4",
             "selected": false
           }
         ],
@@ -100,29 +115,34 @@
       {
         "question_type": "multiple-choice",
         "identifier": "list_4",
-        "headline": "Müdigkeit oder Gefühl, keine Energie zu haben",
-        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "headline": "I think that I would need assistance to be able to use this website.",
+        "description": "",
         "required": true,
         "multiple": "false",
         "choices": [
           {
-            "label": "Überhaupt nicht",
+            "label": "Strongly Disagree",
             "value": "0",
             "selected": false
           },
           {
-            "label": "An einzelnen Tagen",
+            "label": "",
             "value": "1",
             "selected": false
           },
           {
-            "label": "An mehr als der Hälfte der Tage",
+            "label": "",
             "value": "2",
             "selected": false
           },
           {
-            "label": "Beinahe jeden Tag",
+            "label": "",
             "value": "3",
+            "selected": false
+          },
+          {
+            "label": "Strongly Agree",
+            "value": "4",
             "selected": false
           }
         ],
@@ -131,29 +151,34 @@
       {
         "question_type": "multiple-choice",
         "identifier": "list_5",
-        "headline": "Verminderter Appetit oder übermäßiges Bedürfnis zu essen",
-        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "headline": "I found the various functions in this website were well integrated",
+        "description": "",
         "required": true,
         "multiple": "false",
         "choices": [
           {
-            "label": "Überhaupt nicht",
+            "label": "Strongly Disagree",
             "value": "0",
             "selected": false
           },
           {
-            "label": "An einzelnen Tagen",
+            "label": "",
             "value": "1",
             "selected": false
           },
           {
-            "label": "An mehr als der Hälfte der Tage",
+            "label": "",
             "value": "2",
             "selected": false
           },
           {
-            "label": "Beinahe jeden Tag",
+            "label": "",
             "value": "3",
+            "selected": false
+          },
+          {
+            "label": "Strongly Agree",
+            "value": "4",
             "selected": false
           }
         ],
@@ -162,29 +187,34 @@
       {
         "question_type": "multiple-choice",
         "identifier": "list_6",
-        "headline": "Schlechte Meinung von sich selbst; Gefühl, ein Versager zu sein oder die Familie enttäuscht zu haben",
-        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "headline": "I thought there was too much inconsistency in this website",
+        "description": "",
         "required": true,
         "multiple": "false",
         "choices": [
           {
-            "label": "Überhaupt nicht",
+            "label": "Strongly Disagree",
             "value": "0",
             "selected": false
           },
           {
-            "label": "An einzelnen Tagen",
+            "label": "",
             "value": "1",
             "selected": false
           },
           {
-            "label": "An mehr als der Hälfte der Tage",
+            "label": "",
             "value": "2",
             "selected": false
           },
           {
-            "label": "Beinahe jeden Tag",
+            "label": "",
             "value": "3",
+            "selected": false
+          },
+          {
+            "label": "Strongly Agree",
+            "value": "4",
             "selected": false
           }
         ],
@@ -193,29 +223,34 @@
       {
         "question_type": "multiple-choice",
         "identifier": "list_7",
-        "headline": "Schwierigkeiten, sich auf etwas zu konzentrieren, z.B. beim Zeitunglesen oder Fernsehen",
-        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "headline": "I would imagine that most people would learn to use this website very quickly.",
+        "description": "",
         "required": true,
         "multiple": "false",
         "choices": [
           {
-            "label": "Überhaupt nicht",
+            "label": "Strongly Disagree",
             "value": "0",
             "selected": false
           },
           {
-            "label": "An einzelnen Tagen",
+            "label": "",
             "value": "1",
             "selected": false
           },
           {
-            "label": "An mehr als der Hälfte der Tage",
+            "label": "",
             "value": "2",
             "selected": false
           },
           {
-            "label": "Beinahe jeden Tag",
+            "label": "",
             "value": "3",
+            "selected": false
+          },
+          {
+            "label": "Strongly Agree",
+            "value": "4",
             "selected": false
           }
         ],
@@ -224,29 +259,34 @@
       {
         "question_type": "multiple-choice",
         "identifier": "list_8",
-        "headline": "Waren Ihre Bewegungen oder Ihre Sprache so verlangsamt, dass es auch anderen auffallen würde? Oder waren Sie im Gegenteil „zappelig“ oder ruhelos und hatten dadurch einen stärkeren Bewegungsdrang als sonst?",
-        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "headline": "I found this website very cumbersome/awkward to use.",
+        "description": "",
         "required": true,
         "multiple": "false",
         "choices": [
           {
-            "label": "Überhaupt nicht",
+            "label": "Strongly Disagree",
             "value": "0",
             "selected": false
           },
           {
-            "label": "An einzelnen Tagen",
+            "label": "",
             "value": "1",
             "selected": false
           },
           {
-            "label": "An mehr als der Hälfte der Tage",
+            "label": "",
             "value": "2",
             "selected": false
           },
           {
-            "label": "Beinahe jeden Tag",
+            "label": "",
             "value": "3",
+            "selected": false
+          },
+          {
+            "label": "Strongly Agree",
+            "value": "4",
             "selected": false
           }
         ],
@@ -255,29 +295,34 @@
       {
         "question_type": "multiple-choice",
         "identifier": "list_9",
-        "headline": "Gedanken, dass Sie lieber tot wären oder sich Leid zufügen möchten",
-        "description": "Wie oft fühlten Sie sich im Verlauf der letzten 2 Wochen durch die folgenden Beschwerden beeinträchtigt?",
+        "headline": "I felt very confident using this website.",
+        "description": "",
         "required": true,
         "multiple": "false",
         "choices": [
           {
-            "label": "Überhaupt nicht",
+            "label": "Strongly Disagree",
             "value": "0",
             "selected": false
           },
           {
-            "label": "An einzelnen Tagen",
+            "label": "",
             "value": "1",
             "selected": false
           },
           {
-            "label": "An mehr als der Hälfte der Tage",
+            "label": "",
             "value": "2",
             "selected": false
           },
           {
-            "label": "Beinahe jeden Tag",
+            "label": "",
             "value": "3",
+            "selected": false
+          },
+          {
+            "label": "Strongly Agree",
+            "value": "4",
             "selected": false
           }
         ],
@@ -286,36 +331,41 @@
       {
         "question_type": "multiple-choice",
         "identifier": "list_10",
-        "headline": "Wenn Sie ein Problem angekreuzt haben, wie schwierig war es für Sie, Ihre Arbeit zu erledigen, sich um Dinge zu Hause zu kümmern oder mit anderen Menschen auszukommen?",
+        "headline": "I needed to learn a lot of things before I could get going with this website.",
         "description": "",
-        "required": false,
+        "required": true,
         "multiple": "false",
         "choices": [
           {
-            "label": "Überhaupt nicht schwierig",
+            "label": "Strongly Disagree",
             "value": "0",
             "selected": false
           },
           {
-            "label": "Ziemlich schwierig",
+            "label": "",
             "value": "1",
             "selected": false
           },
           {
-            "label": "Sehr schwierig",
+            "label": "",
             "value": "2",
             "selected": false
           },
           {
-            "label": "Äußerst schwierig",
+            "label": "",
             "value": "3",
+            "selected": false
+          },
+          {
+            "label": "Strongly Agree",
+            "value": "4",
             "selected": false
           }
         ],
         "jumps": []
       }
     ],
-    "description": "Prof. Dr. Bernd Löwe, 2015, Universitätsklinikum Hamburg-Eppendorf",
-    "category_name_hyphenated": "PHQ9"
+    "description": "This questionnaire is based on the System Usability Scale (SUS), which was developed by John Brooke while working at Digital Equipment Corporation. © Digital Equipment Corporation, 1986.",
+    "category_name_hyphenated": "SUS"
   }
 }

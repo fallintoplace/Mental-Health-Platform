@@ -29,6 +29,12 @@
 import { mapGetters } from "vuex";
 
 export default {
+  metaInfo() {
+    let title = ": " + "(" + this.score + " / " + this.total + ")";
+    if (this.total === 27) title = "PHQ-9 " + title;
+    else if (this.total === 21) title = "GAD-7 " + title;
+    return { title };
+  },
   data() {
     return {
       timeCompletion: 0,

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <sidebar-menu :menu="menu" :collapsed="true" />
+    <sidebar-menu :menu="menu" :width="'10rem'" />
     <div class="box">
       <h2 class="home__title">
         Patient Health Questionnaire 9 (PHQ-9)
@@ -129,6 +129,11 @@ export default {
           href: "/",
           title: "Home",
           icon: "fas fa-home",
+        },
+        {
+          href: "/SUS",
+          title: "SUS Feedback",
+          icon: "far fa-comment-dots",
         },
         // {
         //   href: "/about",

@@ -7,7 +7,7 @@
       @change="refetchData()"
     />
 
-    <h1 class="dashboard__title">Statistical Dashboards</h1>
+    <h1 class="dashboard__title">Overview Dashboard</h1>
 
     <h2>Filling frequencies of the respondents</h2>
     <div class="box__frequencies">
@@ -42,26 +42,26 @@
       <template v-if="toggle === 'PHQ-9'">
         <template v-if="loadingAverageScore">
           <apexchart
-            width="1000"
-            height="1000"
+            width="900"
+            height="900"
             type="polarArea"
             :options="averageOptions"
             :series="averageSeries"
           ></apexchart>
         </template>
-        <PuSkeleton circle height="490px" width="1000px" v-else />
+        <PuSkeleton circle height="490px" width="900px" v-else />
       </template>
       <template v-else-if="toggle === 'GAD-7'">
         <template v-if="loadingAverageScore">
           <apexchart
-            width="1000"
-            height="1000"
+            width="800"
+            height="800"
             type="polarArea"
             :options="GAD7AverageOptions"
             :series="GAD7AverageSeries"
           ></apexchart>
         </template>
-        <PuSkeleton circle height="490px" width="1000px" v-else />
+        <PuSkeleton circle height="490px" width="800px" v-else />
       </template>
     </div>
 
@@ -97,7 +97,7 @@ import { mapGetters } from "vuex";
 
 export default {
   metaInfo() {
-    let title = "Overview";
+    let title = "Overview" + " (" + this.toggle + ")";
 
     return { title };
   },
@@ -271,6 +271,9 @@ export default {
 
       PHQ9chartOptions: {
         chart: {
+          toolbar: {
+            show: false,
+          },
           fontFamily: "Calibri",
         },
         dataLabels: {
@@ -300,6 +303,9 @@ export default {
       },
       GAD7chartOptions: {
         chart: {
+          toolbar: {
+            show: false,
+          },
           fontFamily: "Calibri",
         },
         dataLabels: {
@@ -471,7 +477,9 @@ export default {
       // window.location.reload();
     },
     async fetchFillingFrequencies() {
-      const { data: PHQ9Data, error: PHQ9Error } = await supabase.from("responses");
+      const { data: PHQ9Data, error: PHQ9Error } = await supabase.from(
+        "responses"
+      );
       // console.log(data);
       // console.log(error);
       let len = PHQ9Data.length;
@@ -561,6 +569,7 @@ $block: ".dashboard";
   min-height: calc(100vh - 60px);
   flex-direction: column;
   padding-bottom: 5rem;
+  padding-top: 1rem;
   &__title {
     color: rgb(74, 57, 124);
   }

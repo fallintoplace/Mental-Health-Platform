@@ -6,6 +6,7 @@
         <p v-if="value.description" class="question__description">
           {{ value.description }}
         </p>
+        <!-- <div>Decision Changes: {{ getDecisionChanges }}</div> -->
         <h2 class="question__title" :style="{ color: 'turquoise' }">
           <template v-if="value.question_type === 'final'">
             <!-- <h1>
@@ -16,10 +17,14 @@
             <div>Email: {{ getEmail }}</div>
             <div>Results: {{ getResults }}</div>
             <div>Time Completion: {{ getTimeCompletion }}</div>
-            <div>Time for Each Q: {{ getTimeForEach }}</div>
+            <div>Time each Question: {{ getTimeForEach }}</div>
             <div>Device: {{ getDevice }}</div>
             <div>Location: {{ getLocation }}</div>
             <div>Language: {{ getLanguage }}</div>
+            <div>City: {{ getCity }}</div>
+            <div>Operating System: {{ getOperatingSystem }}</div>
+            <div>User Agent: {{ getUserAgent }}</div>
+            <div>Decision Changes: {{ getDecisionChanges }}</div>
             <p></p>
             <router-link to="/result">
               <!-- <button class="button-33" role="button" @click="uploadResponse">Upload Response</button> -->
@@ -153,6 +158,10 @@ export default {
     ...mapGetters(["getTimestamp"]),
     ...mapGetters(["getTimeForEach"]),
     ...mapGetters(["getLanguage"]),
+    ...mapGetters(["getCity"]),
+    ...mapGetters(["getOperatingSystem"]),
+    ...mapGetters(["getUserAgent"]),
+    ...mapGetters(["getDecisionChanges"]),
 
     classes() {
       const result = [

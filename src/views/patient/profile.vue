@@ -1,7 +1,8 @@
 <template>
   <div class="home">
+    <div class="box">
     <sidebar-menu :menu="menu" :collapsed="true" />
-    <h2  :style="{ color: 'purple' }">Personal Information</h2>
+    <h2 class="home__title">Personal Information</h2>
     <div>Email: {{ this.menu[0].title }}</div>
     <br />
     Name: {{ name }} {{ surname }}
@@ -48,6 +49,7 @@
     >
       {{ saveMessage }}
     </button>
+    </div>
   </div>
 </template>
 
@@ -58,7 +60,7 @@ import moment from "moment";
 
 export default {
   metaInfo() {
-    let title = "Edit Profile";
+    let title = "Profile: " + this.getEmail;
 
     return { title };
   },
@@ -176,6 +178,9 @@ export default {
   min-height: calc(100vh - 60px);
   flex-direction: column;
   font-family: "Roboto", sans-serif;
+  &__title {
+    color: rgb(74, 57, 124);
+  }
 }
 
 .datePicker {
@@ -320,4 +325,19 @@ input[type="text"]:focus {
   display: flex;
   width: 280px;
 }
+
+.box {
+  border: 2px solid black;
+  height: 400px;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
 </style>

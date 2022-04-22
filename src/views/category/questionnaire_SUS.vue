@@ -1,6 +1,5 @@
 <template>
   <div class="questionnaire">
-    <!-- <h1>{{ getTime }}</h1> -->
     <sidebar-menu :menu="menu" :collapsed="true" />
     <stepper
       v-if="questions"
@@ -37,9 +36,10 @@
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import * as TYPES from "@/store/modules/questionnaire/types";
 import Feed from "@/components/shared/Feed";
-import Question from "@/components/shared/Question";
+import Question from "@/components/shared/Question_SUS";
 import Keyboard from "@/components/shared/Keyboard";
 import Stepper from "@/components/shared/Stepper";
+
 
 export default {
   name: "QuestionnairePage",
@@ -60,26 +60,6 @@ export default {
           hiddenOnCollapse: true,
         },
         {
-          href: "/PHQ9",
-          title: "Start PHQ9",
-          icon: "fas fa-copy",
-        },
-        {
-          href: "/GAD7",
-          title: "Start GAD7",
-          icon: "far fa-copy",
-        },
-        {
-          href: "/profile",
-          title: "Edit Profile",
-          icon: "fas fa-user-cog",
-        },
-        {
-          href: "/result",
-          title: "Show Result",
-          icon: "fas fa-poll-h",
-        },
-        {
           href: "/",
           title: "Exit",
           icon: "fas fa-sign-out-alt",
@@ -97,7 +77,7 @@ export default {
     this.resetData();
   },
   created() {
-    this.menu[0].title = this.getEmail;
+    // this.menu[0].title = this.getEmail;
 
   },
 

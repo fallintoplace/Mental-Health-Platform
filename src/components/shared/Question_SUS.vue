@@ -6,7 +6,6 @@
         <p v-if="value.description" class="question__description">
           {{ value.description }}
         </p>
-        <!-- <div>Decision Changes: {{ getDecisionChanges }}</div> -->
         <h2 class="question__title" :style="{ color: 'turquoise' }">
           <template v-if="value.question_type === 'final'">
             <!-- <h1>
@@ -14,19 +13,9 @@
             </h1>
             ⌛ Time elapsed: {{ getSeconds() }} seconds -->
             <h2>Metadata collected</h2>
-            <div>Email: {{ getEmail }}</div>
             <div>Results: {{ getResults }}</div>
-            <div>Time Completion: {{ getTimeCompletion }}</div>
-            <div>Time each Question: {{ getTimeForEach }}</div>
-            <div>Device: {{ getDevice }}</div>
-            <div>Location: {{ getLocation }}</div>
-            <div>Language: {{ getLanguage }}</div>
-            <div>City: {{ getCity }}</div>
-            <div>Operating System: {{ getOperatingSystem }}</div>
-            <div>User Agent: {{ getUserAgent }}</div>
-            <div>Decision Changes: {{ getDecisionChanges }}</div>
             <p></p>
-            <router-link to="/result">
+            <router-link to="/">
               <!-- <button class="button-33" role="button" @click="uploadResponse">Upload Response</button> -->
               <button
                 class="button-82-pushable"
@@ -149,19 +138,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["getTimeCompletion"]),
     ...mapGetters(["getResults"]),
-    ...mapGetters(["getEmail"]),
-    ...mapGetters(["getDevice"]),
-    ...mapGetters(["getLocation"]),
-    ...mapGetters(["getDatestamp"]),
-    ...mapGetters(["getTimestamp"]),
-    ...mapGetters(["getTimeForEach"]),
-    ...mapGetters(["getLanguage"]),
-    ...mapGetters(["getCity"]),
-    ...mapGetters(["getOperatingSystem"]),
-    ...mapGetters(["getUserAgent"]),
-    ...mapGetters(["getDecisionChanges"]),
 
     classes() {
       const result = [
@@ -340,15 +317,12 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["setTimeCompletion"]),
     ...mapMutations(["setResults"]),
-    ...mapMutations(["setTimeForEach"]),
+
 
     async uploadResponse() {
-      const { data, error } = await supabase.from("GAD7").insert([
+      const { data, error } = await supabase.from("SUS").insert([
         {
-          email: this.getEmail,
-          time_completion: this.getTimeCompletion,
           q0: this.getResults[0],
           q1: this.getResults[1],
           q2: this.getResults[2],
@@ -357,27 +331,8 @@ export default {
           q5: this.getResults[5],
           q6: this.getResults[6],
           q7: this.getResults[7],
-          total_score:
-            +this.getResults[0] +
-            +this.getResults[1] +
-            +this.getResults[2] +
-            +this.getResults[3] +
-            +this.getResults[4] +
-            +this.getResults[5] +
-            +this.getResults[6],
-          device: this.getDevice,
-          location: this.getLocation,
-          datestamp: this.getDatestamp,
-          timestamp: this.getTimestamp,
-          t0: this.getTimeForEach[0],
-          t1: this.getTimeForEach[1],
-          t2: this.getTimeForEach[2],
-          t3: this.getTimeForEach[3],
-          t4: this.getTimeForEach[4],
-          t5: this.getTimeForEach[5],
-          t6: this.getTimeForEach[6],
-          t7: this.getTimeForEach[7],
-          language: this.getLanguage,
+          q8: this.getResults[8],
+          q9: this.getResults[9],
         },
       ]);
       console.log(data);
@@ -489,13 +444,6 @@ export default {
         value: value,
       };
       this.setResults(payload);
-
-      const sec = this.getSeconds();
-      const payload_timeForEach = {
-        index: this.activeIndex,
-        value: sec,
-      };
-      this.setTimeForEach(payload_timeForEach);
 
       setTimeout(() => {
         this.$emit("submit", this.jumpingStepId);
@@ -658,7 +606,8 @@ $block: ".question";
 
   &__options {
     &_multiple {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       grid-row-gap: calc(var(--gap) / 2);
       grid-column-gap: calc(var(--gap) * 1.5);
 

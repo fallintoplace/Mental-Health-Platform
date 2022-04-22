@@ -49,22 +49,36 @@
           <ve-table :columns="columns" :table-data="responses" />
         </div>
         <div class="box__table">
-          <ve-table :columns="columns" :table-data="GAD7Responses" />
-        </div>
-        <div class="box__table">
           <line-chart
             :labels="labels"
             :datasets="datasets"
             :options="options"
           ></line-chart>
         </div>
-        <div class="box__table">
+        <!-- <div class="box__table">
           <line-chart
             :labels="labels"
             :datasets="datasets1"
             :options="options1"
           ></line-chart>
+        </div> -->
+        <div class="box__table">
+          <ve-table :columns="columns" :table-data="GAD7Responses" />
         </div>
+        <div class="box__table">
+          <line-chart
+            :labels="GAD7_labels"
+            :datasets="GAD7_datasets"
+            :options="GAD7_options"
+          ></line-chart>
+        </div>
+        <!-- <div class="box__table">
+          <line-chart
+            :labels="GAD7_labels"
+            :datasets="GAD7_datasets1"
+            :options="GAD7_options1"
+          ></line-chart>
+        </div> -->
 
         <div v-for="(response, index) in responses" :key="index">
           <!-- {{ response }} -->
@@ -82,7 +96,7 @@ import LineChart from "@/components/LineChart";
 export default {
   metaInfo() {
     let title = "Track Patient";
-
+    if (this.currentEmail) title += " (" + this.currentEmail + ")";
     return { title };
   },
   name: "SinglePatient",
@@ -91,6 +105,7 @@ export default {
   },
   data() {
     return {
+      currentEmail: null,
       columns: [
         { field: "email", key: "a", title: "Type", align: "center" },
         { field: "q0", key: "b", title: "Q1", align: "center" },
@@ -133,7 +148,8 @@ export default {
           text: null,
         },
       },
-      labels: [0, 1, 2, 3, 4, 5, 6],
+      labels: [],
+      GAD7_labels: [],
       options: {
         scales: {
           yAxes: [
@@ -157,19 +173,36 @@ export default {
           ],
         },
       },
+      GAD7_options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                max: 25,
+              },
+            },
+          ],
+        },
+      },
+      GAD7_options1: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      },
       datasets: [
         {
           data: [],
           label: "Score PHQ-9",
-          borderColor: "rgba(255, 56, 96, 0.5)",
-          backgroundColor: "rgba(255, 56, 96, 0.1)",
+          borderColor: "rgba(50, 115, 220, 0.5)",
+          backgroundColor: "rgba(50, 115, 220, 0.1)",
         },
-        // {
-        //   data: [],
-        //   label: "Score GAD-7",
-        //   borderColor: "rgba(50, 115, 220, 0.5)",
-        //   backgroundColor: "rgba(50, 115, 220, 0.1)",
-        // },
       ],
       datasets1: [
         {
@@ -178,12 +211,23 @@ export default {
           borderColor: "rgba(50, 115, 220, 0.5)",
           backgroundColor: "rgba(50, 115, 220, 0.1)",
         },
-        // {
-        //   data: [],
-        //   label: "Score PHQ-9",
-        //   borderColor: "rgba(255, 56, 96, 0.5)",
-        //   backgroundColor: "rgba(255, 56, 96, 0.1)",
-        // },
+      ],
+      GAD7_datasets: [
+        {
+          data: [],
+          label: "Score GAD-7",
+          borderColor: "rgba(255, 56, 96, 0.5)",
+          backgroundColor: "rgba(255, 56, 96, 0.1)",
+        },
+      ],
+      GAD7_datasets1: [
+        {
+          data: [],
+          label: "Time Completion GAD-7",
+          
+          borderColor: "rgba(255, 56, 96, 0.5)",
+          backgroundColor: "rgba(255, 56, 96, 0.1)",
+        },
       ],
       menu: [
         {
@@ -211,6 +255,7 @@ export default {
           title: "Log Out",
           icon: "fas fa-sign-out-alt",
         },
+
       ],
       responsesLoaded: null,
       patients: null,
@@ -239,7 +284,6 @@ export default {
           .like("surname", "%" + surname + "%");
         if (error) throw error;
         this.patients = data;
-        console.log(data);
       } else if (email && name) {
         const { data, error } = await supabase
           .from("patients")
@@ -248,7 +292,6 @@ export default {
           .like("name", "%" + name + "%");
         if (error) throw error;
         this.patients = data;
-        console.log(data);
       } else if (email && surname) {
         const { data, error } = await supabase
           .from("patients")
@@ -257,7 +300,6 @@ export default {
           .like("surname", "%" + surname + "%");
         if (error) throw error;
         this.patients = data;
-        console.log(data);
       } else if (name && surname) {
         const { data, error } = await supabase
           .from("patients")
@@ -266,7 +308,6 @@ export default {
           .like("surname", "%" + surname + "%");
         if (error) throw error;
         this.patients = data;
-        console.log(data);
       } else if (email) {
         const { data, error } = await supabase
           .from("patients")
@@ -274,7 +315,6 @@ export default {
           .like("email", "%" + email + "%");
         if (error) throw error;
         this.patients = data;
-        console.log(data);
       } else if (name) {
         const { data, error } = await supabase
           .from("patients")
@@ -282,7 +322,6 @@ export default {
           .like("name", "%" + name + "%");
         if (error) throw error;
         this.patients = data;
-        console.log(data);
       } else if (surname) {
         const { data, error } = await supabase
           .from("patients")
@@ -290,27 +329,31 @@ export default {
           .like("surname", "%" + surname + "%");
         if (error) throw error;
         this.patients = data;
-        console.log(data);
       } else {
         const { data, error } = await supabase.from("patients").select("*");
         if (error) throw error;
         this.patients = data;
-        console.log(data);
       }
     },
     async searchResponses(email) {
+      this.currentEmail = email;
       const { data: PHQ9Data, error: PHQ9Error } = await supabase
         .from("responses")
         .select("*")
         .like("email", "%" + email + "%");
+      const { data: GAD7Data, error: GAD7Error } = await supabase
+        .from("GAD7")
+        .select("*")
+        .like("email", "%" + email + "%");
       if (PHQ9Error) throw PHQ9Error;
+      if (GAD7Error) throw GAD7Error;
       this.responses = PHQ9Data;
       this.labels.length = 0;
       this.datasets[0].data.length = 0;
       this.datasets1[0].data.length = 0;
       for (let i = 0; i < this.responses.length; i++) {
         this.responses[i].email = "PHQ-9";
-        this.labels[i] = i + 1;
+        this.labels[i] = this.responses[i].datestamp;
         this.datasets1[0].data[i] = this.responses[i].time_completion;
         this.datasets[0].data[i] =
           this.responses[i].q0 +
@@ -324,22 +367,25 @@ export default {
           this.responses[i].q8;
       }
 
-      const { data: GAD7Data, error: GAD7Error } = await supabase
-        .from("GAD7")
-        .select("*")
-        .like("email", "%" + email + "%");
-      if (GAD7Error) throw GAD7Error;
       this.GAD7Responses = GAD7Data;
+      this.GAD7_labels.length = 0;
+      this.GAD7_datasets[0].data.length = 0;
+      this.GAD7_datasets1[0].data.length = 0;
       for (let i = 0; i < this.GAD7Responses.length; i++) {
         this.GAD7Responses[i].email = "GAD-7";
- 
+        this.GAD7_labels[i] = this.GAD7Responses[i].datestamp;
+
+        this.GAD7_datasets1[0].data[i] = this.GAD7Responses[i].time_completion;
+        this.GAD7_datasets[0].data[i] =
+          this.GAD7Responses[i].q0 +
+          this.GAD7Responses[i].q1 +
+          this.GAD7Responses[i].q2 +
+          this.GAD7Responses[i].q3 +
+          this.GAD7Responses[i].q4 +
+          this.GAD7Responses[i].q5 +
+          this.GAD7Responses[i].q6;
       }
 
-      // this.labels[this.responses.length] = this.responses.length;
-      // this.labels[this.responses.length + 1] = this.responses.length + 1;
-      // this.datasets[0].data[0] = null;
-      // this.datasets[0].data[this.responses.length + 1] = null;
-      // console.log(this.datasets[1]);
     },
     indexToggle(index) {
       // this.toggled.fill(false);
@@ -348,6 +394,7 @@ export default {
         this.toggled.fill(false);
         this.toggled[index] = !this.toggled[index];
       } else if (this.toggled[index]) {
+        this.currentEmail = null;
         this.toggled[index] = !this.toggled[index];
       }
     },
@@ -383,10 +430,10 @@ export default {
 .searchButtons {
   margin-top: 1rem;
   
-  @include display-less(tablet) {
-    width: 100%;
-    overflow: auto;
-  }
+  // @include display-less(tablet) {
+  //   width: 100%;
+  //   overflow: auto;
+  // }
   // display: flex;
   
   // justify-content: space-between;
@@ -401,6 +448,10 @@ export default {
   // display: flex;
   // justify-content: center;
   // flex-direction: column;
+  @include display-less(tablet) {
+    // width: 100%;
+    overflow: auto;
+  }
 
 }
 

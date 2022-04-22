@@ -11,6 +11,10 @@ const state = {
   device: null,
   location: null,
   language: null,
+  city: null,
+  operatingSystem: null,
+  userAgent: null,
+  decisionChanges: null,
 };
 
 const getters = {
@@ -23,6 +27,12 @@ const getters = {
   getDevice: (state) => state.device,
   getLocation: (state) => state.location,
   getLanguage: (state) => state.language,
+  getCity: (state) => state.city,
+  getOperatingSystem: (state) => state.operatingSystem,
+  getUserAgent: (state) => state.userAgent,
+  getDecisionChanges: (state) => state.decisionChanges,
+
+  
 };
 
 const actions = {
@@ -40,6 +50,7 @@ const mutations = {
     state.results = [];
     state.timeCompletion = null;
     state.timeForEach = [];
+    state.decisionChanges = 0;
   },
   setTimeCompletion: (state, timeCompletion) => (state.timeCompletion = timeCompletion),
   setEmail: (state, email) => {
@@ -47,6 +58,11 @@ const mutations = {
     // alert(state.email);
   },
   setResults: (state, payload) => {
+    if (
+      state.results[payload.index] >= 0 &&
+      state.results[payload.index] !== payload.value
+    )
+      state.decisionChanges++;
     state.results[payload.index] = payload.value;
   },
   setTimeForEach: (state, payload) => {
@@ -57,6 +73,9 @@ const mutations = {
     // console.log(payload.data.user_agent.device.type);
     state.location = payload.data.location.country.code;
     state.device = payload.data.user_agent.device.type;
+    state.city = payload.data.location.city;
+    state.userAgent = payload.data.user_agent.name;
+    state.operatingSystem = payload.data.user_agent.os.name;
   },
   setDatestampTimestamp: (state) => {
     const date = new Date();
@@ -68,8 +87,10 @@ const mutations = {
   setLanguage: (state, language) => {
     // alert(language);
     state.language = language;
+  },
+  incrementDecisionChanges: (state) => {
+    state.decisionChanges++;
   }
-
 };
 
 export default {

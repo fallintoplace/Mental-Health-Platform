@@ -8,16 +8,31 @@
     />
     <h1 class="home__title">Compare Patients</h1>
     <h2>Score frequencies of Male and Female</h2>
-    <div class="box__gender">
-      <template v-if="isLoaded">
-        <line-chart
-          :width="800"
-          :labels="labels"
-          :datasets="datasets"
-          :options="options"
-        ></line-chart>
-      </template>
-      <PuSkeleton circle height="350px" width="800px"  v-else />
+    <div>
+      <div v-if="toggle === 'PHQ-9'" class="box__gender">
+        <template v-if="isLoaded">
+          <line-chart
+            :width="800"
+            :labels="labels"
+            :datasets="datasets"
+            :options="options"
+          ></line-chart>
+        </template>
+        <PuSkeleton circle height="350px" width="800px" v-else />
+      </div>
+    </div>
+    <div>
+      <div v-if="toggle === 'GAD-7'" class="box__gender">
+        <template v-if="GAD7_isLoaded">
+          <line-chart
+            :width="800"
+            :labels="GAD7_labels"
+            :datasets="GAD7_datasets"
+            :options="GAD7_options"
+          ></line-chart>
+        </template>
+        <PuSkeleton circle height="350px" width="800px" v-else />
+      </div>
     </div>
   </div>
 </template>
@@ -28,6 +43,11 @@ import { supabase } from "@/supabase/init";
 import LineChart from "@/components/LineChart";
 
 export default {
+  metaInfo() {
+    let title = "Compare Patients" + " (" + this.toggle + ")";
+
+    return { title };
+    },
   created() {
     this.menu[0].title = this.getEmail;
     this.fetchData();
@@ -46,11 +66,19 @@ export default {
       const { data: temp, __ } = await supabase.from("responses").select("*");
       this.responses = temp;
       // console.dir(this.responses);
+
+      // eslint-disable-next-line no-unused-vars
+      const { data: GAD7_temp, ____ } = await supabase.from("GAD7").select("*");
+      this.GAD7_responses = GAD7_temp;
+      // console.dir(this.responses);
+      
+//--------------------------------------
+
       var Map = {};
       for (let i = 0; i < this.patients.length; i++) {
         Map[this.patients[i].email] = this.patients[i].gender;
-        console.log(this.patients[i]);
-        console.log(Map[this.patients[i].email]);
+        // console.log(this.patients[i]);
+        // console.log(Map[this.patients[i].email]);
       }
       for (let i = 0; i < 28; i++) {
         this.labels[i] = i;
@@ -58,7 +86,7 @@ export default {
         this.datasets[1].data[i] = 0;
       }
       for (let i = 0; i < this.responses.length; i++) {
-        var totalScore = 0;
+        let totalScore = 0;
         totalScore += this.responses[i].q0;
         totalScore += this.responses[i].q1;
         totalScore += this.responses[i].q2;
@@ -72,7 +100,35 @@ export default {
           this.datasets[0].data[totalScore]++;
         else this.datasets[1].data[totalScore]++;
       }
+//-------------------------------------------
+      // Map = {};
+      // for (let i = 0; i < this.patients.length; i++) {
+      //   Map[this.patients[i].email] = this.patients[i].gender;
+      //   // console.log(this.patients[i]);
+      //   // console.log(Map[this.patients[i].email]);
+      // }
+      for (let i = 0; i < 22; i++) {
+        this.GAD7_labels[i] = i;
+        this.GAD7_datasets[0].data[i] = 0;
+        this.GAD7_datasets[1].data[i] = 0;
+      }
+      for (let i = 0; i < this.GAD7_responses.length; i++) {
+        let totalScore = 0;
+        totalScore += this.GAD7_responses[i].q0;
+        totalScore += this.GAD7_responses[i].q1;
+        totalScore += this.GAD7_responses[i].q2;
+        totalScore += this.GAD7_responses[i].q3;
+        totalScore += this.GAD7_responses[i].q4;
+        totalScore += this.GAD7_responses[i].q5;
+        totalScore += this.GAD7_responses[i].q6;
+        if (Map[this.GAD7_responses[i].email] === "Male")
+          this.GAD7_datasets[0].data[totalScore]++;
+        else this.GAD7_datasets[1].data[totalScore]++;
+      }
+
+
       this.isLoaded = true;
+      this.GAD7_isLoaded = true;
       // console.dir(this.datasets[0].data);
     },
   },
@@ -116,6 +172,7 @@ export default {
       },
       toggle: null,
       isLoaded: null,
+      GAD7_isLoaded: null,
       patients: null,
       responses: null,
       options: {
@@ -130,8 +187,36 @@ export default {
           ],
         },
       },
+      GAD7_options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                precision: 0,
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      },
       labels: [],
+      GAD7_labels: [],
       datasets: [
+        {
+          data: [],
+          label: "Male",
+          borderColor: "rgba(50, 115, 220, 0.5)",
+          backgroundColor: "rgba(50, 115, 220, 0.1)",
+        },
+        {
+          data: [],
+          label: "Female",
+
+          borderColor: "rgba(255, 56, 96, 0.5)",
+          backgroundColor: "rgba(255, 56, 96, 0.1)",
+        },
+      ],
+      GAD7_datasets: [
         {
           data: [],
           label: "Male",

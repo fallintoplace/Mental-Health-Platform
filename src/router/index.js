@@ -15,10 +15,15 @@ const routes = [
     name: "PHQ9",
     component: () => import("@/views/patient/PHQ9"),
   },
-   {
+  {
     path: "/GAD7",
     name: "GAD7",
     component: () => import("@/views/patient/GAD7"),
+  },
+  {
+    path: "/SUS",
+    name: "SUS",
+    component: () => import("@/views/patient/SUS"),
   },
   {
     path: "/profile",
@@ -62,6 +67,12 @@ const routes = [
     name: "QuestionnairePage1",
     // props: ({ params }) => ({ questionnaire: +params.questionnaire }),
     component: () => import("@/views/category/questionnaire1"),
+  },
+  {
+    path: "/startSUS",
+    name: "QuestionnairePage_SUS",
+    // props: ({ params }) => ({ questionnaire: +params.questionnaire }),
+    component: () => import("@/views/category/questionnaire_SUS"),
   },
   // {
   //   path: "/:category/:id",
