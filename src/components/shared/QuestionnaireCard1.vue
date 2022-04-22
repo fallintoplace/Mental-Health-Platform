@@ -50,6 +50,7 @@ $block: ".card";
     right: 0;
     bottom: 0;
     left: 0;
+    padding-left: 5rem;
   }
 
   @include display(tablet) {

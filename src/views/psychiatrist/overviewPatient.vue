@@ -1,54 +1,68 @@
 <template>
   <div class="dashboard">
     <sidebar-menu :menu="menu" :collapsed="true" />
-    <!-- <Slide>
-      <h3>Email: {{ getEmail }}</h3>
-      <a id="track" href="/trackPatient">
-        <span>Track Patient</span>
-      </a>
-      <a id="compare" href="/CompareGroup">
-        <span>Compare Groups</span>
-      </a>
-      <a id="compare" href="/overviewPatient">
-        <span>Overview</span>
-      </a>
-    </Slide> -->
+    <toggle-switch
+      :options="myOptions"
+      v-model="toggle"
+      @change="refetchData()"
+    />
 
-    <p />
-
-    <h1 :style="{ color: 'Purple' }">Statistical Dashboards</h1>
-
+    <h1 class="dashboard__title">Statistical Dashboards</h1>
 
     <h2>Filling frequencies of the respondents</h2>
-    <div class="box1">
-      <template v-if="loadingFillingFrequencies">
-        <apexchart
-          width="800"
-          height="350"
-          type="heatmap"
-          :options="chartOptions0"
-          :series="series0"
-        ></apexchart>
+    <div class="box__frequencies">
+      <template v-if="toggle === 'PHQ-9'">
+        <template v-if="loadingFillingFrequencies">
+          <apexchart
+            height="350px"
+            width="800px"
+            type="heatmap"
+            :options="PHQ9chartOptions"
+            :series="PHQ9series"
+          ></apexchart>
+        </template>
+        <PuSkeleton circle height="350px" width="800px" v-else />
       </template>
-      <PuSkeleton :count="18" v-else />
+      <template v-else-if="toggle === 'GAD-7'">
+        <template v-if="loadingFillingFrequencies">
+          <apexchart
+            height="350px"
+            width="700px"
+            type="heatmap"
+            :options="GAD7chartOptions"
+            :series="GAD7series"
+          ></apexchart>
+        </template>
+        <PuSkeleton circle height="350px" width="700px" v-else />
+      </template>
     </div>
 
-    <!-- <p /> -->
-    <!-- <h2 class="title is-5">Monthly Respondent Chart</h2> 
-    <monthly-sales-chart></monthly-sales-chart> -->
-    <!-- <p /> -->
     <h2>Average Score for each Question</h2>
     <div class="box2">
-      <template v-if="loadingAverageScore">
-        <apexchart
-          width="1000"
-          height="1000"
-          type="polarArea"
-          :options="timeTakenOptions"
-          :series="series1"
-        ></apexchart>
+      <template v-if="toggle === 'PHQ-9'">
+        <template v-if="loadingAverageScore">
+          <apexchart
+            width="1000"
+            height="1000"
+            type="polarArea"
+            :options="averageOptions"
+            :series="averageSeries"
+          ></apexchart>
+        </template>
+        <PuSkeleton circle height="490px" width="1000px" v-else />
       </template>
-      <PuSkeleton circle height="490px" width="1000px" v-else />
+      <template v-else-if="toggle === 'GAD-7'">
+        <template v-if="loadingAverageScore">
+          <apexchart
+            width="1000"
+            height="1000"
+            type="polarArea"
+            :options="GAD7AverageOptions"
+            :series="GAD7AverageSeries"
+          ></apexchart>
+        </template>
+        <PuSkeleton circle height="490px" width="1000px" v-else />
+      </template>
     </div>
 
     <h2>Device of the Respondents</h2>
@@ -66,7 +80,7 @@
     </div>
 
     <h2>Geolocation of the Respondents</h2>
-    <div class="box">
+    <div class="box__country">
       <template v-if="loadingCountryData">
         <MapChart :countryData="countryData" />
       </template>
@@ -76,9 +90,8 @@
 </template>
 
 <script>
-// import MonthlySalesChart from "@/components/MonthlySalesChart";
+/* eslint-disable no-unused-vars */
 import MapChart from "vue-map-chart";
-// import { Slide } from "vue-burger-menu";
 import { supabase } from "@/supabase/init";
 import { mapGetters } from "vuex";
 
@@ -96,6 +109,39 @@ export default {
   },
   data() {
     return {
+      myOptions: {
+        layout: {
+          color: "black",
+          backgroundColor: "white",
+          selectedColor: "white",
+          selectedBackgroundColor: "green",
+          borderColor: "black",
+          fontFamily: "Calibri",
+          fontWeight: "normal",
+          fontWeightSelected: "bold",
+          squareCorners: false,
+          noBorder: true,
+        },
+        size: {
+          fontSize: 0.9,
+          height: 2,
+          padding: 0.3,
+          width: 8,
+        },
+        items: {
+          delay: 0.4,
+          disabled: false,
+          labels: [
+            {
+              name: "PHQ-9",
+              color: "black",
+              backgroundColor: "lightgrey",
+            },
+            { name: "GAD-7", color: "black", backgroundColor: "lightgrey" },
+          ],
+        },
+      },
+      toggle: null,
       menu: [
         {
           header: true,
@@ -129,8 +175,10 @@ export default {
       loadingDevice: null,
       countryData: null,
 
-      series1: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      timeTakenOptions: {
+      averageSeries: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      GAD7AverageSeries: [0, 0, 0, 0, 0, 0, 0],
+
+      averageOptions: {
         yaxis: [
           {
             // min: 0,
@@ -176,8 +224,52 @@ export default {
           },
         ],
       },
+      GAD7AverageOptions: {
+        yaxis: [
+          {
+            // min: 0,
+            // max: 3,
+            labels: {
+              formatter: function (val) {
+                return val.toFixed(2);
+              },
+            },
+          },
+        ],
+        chart: {
+          type: "polarArea",
+        },
+        labels: [
+          "Feeling nervous, anxious, or on edge",
+          "Not being able to stop or control worrying",
+          "Worrying too much about different things",
+          "Trouble relaxing",
+          "Being so restless that it is hard to sit still",
+          "Becoming easily annoyed or irritable",
+          "Feeling afraid, as if something awful might happen",
+        ],
+        stroke: {
+          colors: ["#fff"],
+        },
+        fill: {
+          opacity: 0.8,
+        },
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
 
-      chartOptions0: {
+      PHQ9chartOptions: {
         chart: {
           fontFamily: "Calibri",
         },
@@ -192,17 +284,40 @@ export default {
           labels: {
             show: true,
           },
+          categories: [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5",
+            "Q6",
+            "Q7",
+            "Q8",
+            "Q9",
+            "Q10",
+          ],
         },
-        // title: {
-        //   text: "Filling frequencies of the respondents",
-        //   align: "center",
-        //   style: {
-        //     fontSize: "22px",
-        //   },
-        // },
+      },
+      GAD7chartOptions: {
+        chart: {
+          fontFamily: "Calibri",
+        },
+        dataLabels: {
+          enabled: true,
+        },
+        colors: ["#fb0012"],
+        xaxis: {
+          type: "category",
+          tickAmount: 10,
+          tickPlacement: "on",
+          labels: {
+            show: true,
+          },
+          categories: ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8"],
+        },
       },
 
-      series0: [
+      PHQ9series: [
         {
           name: "Nearly everyday",
           data: [
@@ -264,6 +379,60 @@ export default {
           ],
         },
       ],
+      GAD7series: [
+        {
+          name: "Nearly everyday",
+          data: [
+            { x: "Q1", y: 30 },
+            { x: "Q2", y: 30 },
+            { x: "Q3", y: 25 },
+            { x: "Q4", y: 20 },
+            { x: "Q5", y: 10 },
+            { x: "Q6", y: 35 },
+            { x: "Q7", y: 20 },
+            { x: "Q8", y: 40 },
+          ],
+        },
+        {
+          name: "More than half the days",
+          data: [
+            { x: "Q1", y: 40 },
+            { x: "Q2", y: 20 },
+            { x: "Q3", y: 25 },
+            { x: "Q4", y: 30 },
+            { x: "Q5", y: 10 },
+            { x: "Q6", y: 20 },
+            { x: "Q7", y: 20 },
+            { x: "Q8", y: 40 },
+          ],
+        },
+        {
+          name: "Several days",
+          data: [
+            { x: "Q1", y: 20 },
+            { x: "Q2", y: 20 },
+            { x: "Q3", y: 25 },
+            { x: "Q4", y: 40 },
+            { x: "Q5", y: 40 },
+            { x: "Q6", y: 25 },
+            { x: "Q7", y: 35 },
+            { x: "Q8", y: 10 },
+          ],
+        },
+        {
+          name: "Not at all",
+          data: [
+            { x: "Q1", y: 10 },
+            { x: "Q2", y: 30 },
+            { x: "Q3", y: 25 },
+            { x: "Q4", y: 10 },
+            { x: "Q5", y: 40 },
+            { x: "Q6", y: 20 },
+            { x: "Q7", y: 15 },
+            { x: "Q8", y: 10 },
+          ],
+        },
+      ],
       seriesDevice: [0, 0, 0],
       chartOptionsDevice: {
         chart: {
@@ -291,41 +460,61 @@ export default {
     ...mapGetters(["getEmail"]),
   },
   created() {
+    this.toggle = "PHQ-9";
     this.menu[0].title = this.getEmail;
     this.fetchFillingFrequencies();
     this.fetchCountryData();
     this.fetchDevice();
   },
   methods: {
+    refetchData() {
+      // window.location.reload();
+    },
     async fetchFillingFrequencies() {
-      const { data, error } = await supabase.from("responses");
-      console.log(data);
-      console.log(error);
-      let len = data.length;
+      const { data: PHQ9Data, error: PHQ9Error } = await supabase.from("responses");
+      // console.log(data);
+      // console.log(error);
+      let len = PHQ9Data.length;
       for (let i = 0; i < 10; i++) {
-        if (i < 9) this.series1[i] = 0;
+        if (i < 9) this.averageSeries[i] = 0;
         var total = 0;
         for (let v = 0; v < 4; v++) {
-          this.series0[3 - v].data[i].y = 0;
+          this.PHQ9series[3 - v].data[i].y = 0;
           for (let j = 0; j < len; j++) {
-            // const { _data, _error, count } = await supabase.from("responses")
-            //   .select("*", { count: "exact" , head: true})
-            //   .eq("q" + i, v);
-            // console.log(_data);
-            // console.log(_error);
-            // console.log(count);
-            // console.log(data[j]["q" + i]);
-            if (data[j]["q" + i] === v) {
-              this.series0[3 - v].data[i].y++;
+            if (PHQ9Data[j]["q" + i] === v) {
+              this.PHQ9series[3 - v].data[i].y++;
               if (i < 9) {
                 total++;
-                this.series1[i] += v;
+                this.averageSeries[i] += v;
               }
             }
           }
         }
-        if (total > 0 && i < 9) this.series1[i] /= total;
+        if (total > 0 && i < 9) this.averageSeries[i] /= total;
       }
+
+      const { data: GAD7Data, error: GAD7Error } = await supabase.from("GAD7");
+      console.log(GAD7Data);
+      // console.log(error);
+      len = GAD7Data.length;
+      for (let i = 0; i < 8; i++) {
+        if (i < 7) this.GAD7AverageSeries[i] = 0;
+        total = 0;
+        for (let v = 0; v < 4; v++) {
+          this.GAD7series[3 - v].data[i].y = 0;
+          for (let j = 0; j < len; j++) {
+            if (GAD7Data[j]["q" + i] === v) {
+              this.GAD7series[3 - v].data[i].y++;
+              if (i < 7) {
+                total++;
+                this.GAD7AverageSeries[i] += v;
+              }
+            }
+          }
+        }
+        if (total > 0 && i < 7) this.GAD7AverageSeries[i] /= total;
+      }
+
       this.loadingFillingFrequencies = true;
       this.loadingAverageScore = true;
     },
@@ -333,8 +522,8 @@ export default {
       const { data, error } = await supabase
         .from("responses")
         .select("location");
-      console.log(data);
-      console.log(error);
+      // console.log(data);
+      // console.log(error);
       const occurrences = data.reduce(function (acc, curr) {
         return (
           !acc[curr.location] ? (acc[curr.location] = 1) : acc[curr.location]++,
@@ -347,14 +536,13 @@ export default {
     },
     async fetchDevice() {
       const { data, error } = await supabase.from("responses").select("device");
-      console.log(data);
-      console.log(error);
+      // console.log(data);
+      // console.log(error);
       for (let i = 0; i < data.length; i++) {
         if (data[i].device === "desktop") this.seriesDevice[0]++;
         if (data[i].device === "phone") this.seriesDevice[1]++;
         if (data[i].device === "tablet") this.seriesDevice[2]++;
       }
-      console.log(this.seriesDevice);
       this.loadingDevice = true;
     },
   },
@@ -362,6 +550,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/styles/main.scss";
+
 $block: ".dashboard";
 
 #{$block} {
@@ -371,40 +561,67 @@ $block: ".dashboard";
   min-height: calc(100vh - 60px);
   flex-direction: column;
   padding-bottom: 5rem;
+  &__title {
+    color: rgb(74, 57, 124);
+  }
 }
-.box {
+.box__country {
   border: 1px solid darkblue;
   height: 600px;
   width: 1000px;
-    border-radius: 5px;
-    margin-bottom: 2rem;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  @include display-less(tablet) {
+    width: 75%;
+    overflow: auto;
+  }
 }
 
 .box3 {
   border: 1px solid darkblue;
-  height: 380px;
-  width: 500px;
-    border-radius: 5px;
-    margin-bottom: 2rem;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  // height: 380px;
+  // width: 500px;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  @include display-less(tablet) {
+    width: 75%;
+    overflow: auto;
+  }
 }
 
 .box2 {
   border: 1px solid darkblue;
-  height: 500px;
-  width: 1000px;
-    border-radius: 5px;
-    margin-bottom: 2rem;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  // height: 500px;
+  // width: 1000px;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  @include display-less(tablet) {
+    width: 75%;
+    overflow: auto;
+  }
 }
 
-.box1 {
+.box__frequencies {
   border: 1px solid darkblue;
-  height: 360px;
-  width: 800px;
-    border-radius: 5px;
-    margin-bottom: 2rem;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  // height: 360px;
+  // width: 800px;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  @include display-less(tablet) {
+    width: 75%;
+    overflow: auto;
+  }
 }
 </style>

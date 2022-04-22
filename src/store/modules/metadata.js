@@ -10,6 +10,7 @@ const state = {
   timestamp: null,
   device: null,
   location: null,
+  language: null,
 };
 
 const getters = {
@@ -21,6 +22,7 @@ const getters = {
   getTimestamp: (state) => state.timestamp,
   getDevice: (state) => state.device,
   getLocation: (state) => state.location,
+  getLanguage: (state) => state.language,
 };
 
 const actions = {
@@ -63,6 +65,10 @@ const mutations = {
     console.log(state.datestamp);
     console.log(state.timestamp);
   },
+  setLanguage: (state, language) => {
+    // alert(language);
+    state.language = language;
+  }
 
 };
 

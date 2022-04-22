@@ -19,6 +19,7 @@
             <div>Time for Each Q: {{ getTimeForEach }}</div>
             <div>Device: {{ getDevice }}</div>
             <div>Location: {{ getLocation }}</div>
+            <div>Language: {{ getLanguage }}</div>
             <p></p>
             <router-link to="/result">
               <!-- <button class="button-33" role="button" @click="uploadResponse">Upload Response</button> -->
@@ -151,6 +152,7 @@ export default {
     ...mapGetters(["getDatestamp"]),
     ...mapGetters(["getTimestamp"]),
     ...mapGetters(["getTimeForEach"]),
+    ...mapGetters(["getLanguage"]),
 
     classes() {
       const result = [
@@ -366,6 +368,7 @@ export default {
           t5: this.getTimeForEach[5],
           t6: this.getTimeForEach[6],
           t7: this.getTimeForEach[7],
+          language: this.getLanguage,
         },
       ]);
       console.log(data);

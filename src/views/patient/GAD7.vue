@@ -15,7 +15,7 @@
 <script>
 import { supabase } from "@/supabase/init";
 
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 import * as TYPES from "@/store/modules/questionnaire/types";
 import QuestionnaireCard from "@/components/shared/QuestionnaireCard1";
 
@@ -49,7 +49,6 @@ export default {
         },
         items: {
           delay: 0.4,
-          preSelected: "English",
           disabled: false,
           labels: [
             {
@@ -99,12 +98,18 @@ export default {
     };
   },
 
-  mounted() {
-    this.fetchQuestionnaire("/api/English/GAD7.json");
-  },
   created() {
     this.menu[0].title = this.getEmail;
     this.uploadEmail();
+    this.toggle = this.getLanguage;
+    if (!this.toggle) {
+      this.toggle = "English";
+      this.setLanguage("English");
+      this.fetchQuestionnaire("/api/English/GAD7.json");
+    } else if (this.toggle === "English")
+      this.fetchQuestionnaire("/api/" + this.toggle + "/GAD7.json");
+    else if (this.toggle === "German")
+      this.fetchQuestionnaire("/api/" + this.toggle + "/GAD7.json");
   },
 
   computed: {
@@ -113,6 +118,7 @@ export default {
       questions: TYPES.GET_QUESTIONS,
     }),
     ...mapGetters(["getEmail"]),
+    ...mapGetters(["getLanguage"]),
 
     numberOfQuestions() {
       if (!this.questions) {
@@ -125,9 +131,11 @@ export default {
 
   methods: {
     refetchQuestionnaire() {
+      this.setLanguage(this.toggle);
       this.fetchQuestionnaire("/api/" + this.toggle + "/GAD7.json");
     },
     ...mapActions("questionnaire", ["fetchQuestionnaire"]),
+    ...mapMutations(["setLanguage"]),
     async uploadEmail() {
       const { _data, _error } = await supabase.from("patients").insert([
         {

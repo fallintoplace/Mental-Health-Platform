@@ -2,7 +2,7 @@
   <div class="home">
     <sidebar-menu :menu="menu" :collapsed="true" />
     <div class="box">
-      <h2 :style="{ color: 'purple' }">
+      <h2 class="home__title">
         Patient Health Questionnaire 9 (PHQ-9)
       </h2>
       <h3>What's your role?</h3>
@@ -227,6 +227,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/styles/main.scss";
 $block: ".home";
 
 #{$block} {
@@ -235,44 +236,12 @@ $block: ".home";
   justify-content: center;
   min-height: calc(100vh - 60px);
   flex-direction: column;
+  &__title {
+    color: rgb(74, 57, 124);
+  }
 }
 
-button {
-  background-color: #ffffff;
-  border: 1px solid rgb(209, 213, 219);
-  border-radius: 0.5rem;
-  box-sizing: border-box;
-  color: #111827;
-  font-family: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: large;
-  font-weight: 600;
-  line-height: 1.25rem;
-  padding: 0.75rem 1rem;
-  text-align: center;
-  text-decoration: none #d1d5db solid;
-  text-decoration-thickness: auto;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  margin-top: 10px;
-}
 
-button:hover {
-  background-color: rgb(249, 250, 251);
-}
-
-button:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-button:focus-visible {
-  box-shadow: none;
-}
 
 // input {
 //   font-size: 1em;
@@ -367,8 +336,50 @@ $gray: #9b9b9b;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
     rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
     rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  @include display-less(phablet) {
+    width: 75%;
+    overflow: auto;
+  }
 }
 
 
+
+
+button {
+  background-color: #ffffff;
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  color: #111827;
+  font-family: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: large;
+  font-weight: 600;
+  line-height: 1.25rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  text-decoration: none #d1d5db solid;
+  text-decoration-thickness: auto;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: rgb(249, 250, 251);
+}
+
+button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  box-shadow: none;
+}
 
 </style>

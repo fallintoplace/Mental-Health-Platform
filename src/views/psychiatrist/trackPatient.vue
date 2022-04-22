@@ -1,51 +1,10 @@
 <template>
   <div class="home">
     <sidebar-menu :menu="menu" :collapsed="true" />
-    <h1 :style="{ color: 'purple' }">Track Patient</h1>
+    <h1 class="home__title">Track Patient</h1>
     <div class="namebox">
       <input type="text" placeholder="Email" v-model="email" />
     </div>
-
-    <!-- <div class="form__group field">
-      <input
-        v-model="email"
-        type="input"
-        class="form__field"
-        placeholder="Name"
-        name="name"
-        id="name"
-        required
-      />
-      <label for="name" class="form__label">Email</label>
-    </div> -->
-    <!-- <div class="form__group field">
-      <input
-        v-model="name"
-        type="input"
-        class="form__field"
-        placeholder="Name"
-        name="name"
-        id="name"
-        required
-      />
-      <label for="name" class="form__label">Name</label>
-    </div>
-
-    <div class="form__group field">
-      <input
-        v-model="surname"
-        type="input"
-        class="form__field"
-        placeholder="Name"
-        name="name"
-        id="name"
-        required
-      />
-      <label for="name" class="form__label">Surname</label>
-    </div> -->
-    <!-- <h1>{{ email }}</h1>
-    <h1>{{ name }}</h1>
-    <h1>{{ surname }}</h1> -->
 
     <div class="searchButtons">
       <button
@@ -71,8 +30,6 @@
       </button>
     </div>
 
-    <!-- <h3>{{ patients }}</h3> -->
-
     <div v-for="(patient, index) in patients" :key="index" class="container">
       <!-- {{ patient.email }}
       {{ index }} -->
@@ -88,17 +45,26 @@
       </button>
 
       <div v-show="toggled[index]" class="box">
-        <ve-table :columns="columns" :table-data="responses" />
-        <line-chart
-          :labels="labels"
-          :datasets="datasets"
-          :options="options"
-        ></line-chart>
-        <line-chart
-          :labels="labels"
-          :datasets="datasets1"
-          :options="options1"
-        ></line-chart>
+        <div class="box__table">
+          <ve-table :columns="columns" :table-data="responses" />
+        </div>
+        <div class="box__table">
+          <ve-table :columns="columns" :table-data="GAD7Responses" />
+        </div>
+        <div class="box__table">
+          <line-chart
+            :labels="labels"
+            :datasets="datasets"
+            :options="options"
+          ></line-chart>
+        </div>
+        <div class="box__table">
+          <line-chart
+            :labels="labels"
+            :datasets="datasets1"
+            :options="options1"
+          ></line-chart>
+        </div>
 
         <div v-for="(response, index) in responses" :key="index">
           <!-- {{ response }} -->
@@ -112,7 +78,6 @@
 import { supabase } from "@/supabase/init";
 import { mapGetters } from "vuex";
 import LineChart from "@/components/LineChart";
-import Portfolio from "@/components/Portfolio";
 
 export default {
   metaInfo() {
@@ -123,13 +88,11 @@ export default {
   name: "SinglePatient",
   components: {
     LineChart,
-    // eslint-disable-next-line vue/no-unused-components
-    Portfolio,
   },
   data() {
     return {
       columns: [
-        { field: "email", key: "a", title: "Email", align: "center"},
+        { field: "email", key: "a", title: "Type", align: "center" },
         { field: "q0", key: "b", title: "Q1", align: "center" },
         { field: "q1", key: "c", title: "Q2", align: "center" },
         { field: "q2", key: "d", title: "Q3", align: "center" },
@@ -139,8 +102,14 @@ export default {
         { field: "q6", key: "h", title: "Q7", align: "center" },
         { field: "q7", key: "i", title: "Q8", align: "center" },
         { field: "q8", key: "j", title: "Q9", align: "center" },
+        { field: "q9", key: "o", title: "Q10", align: "center" },
         { field: "total_score", key: "n", title: "Score", align: "center" },
-        { field: "time_completion", key: "k", title: "Time Completion", align: "center" },
+        {
+          field: "time_completion",
+          key: "k",
+          title: "Time Completion",
+          align: "center",
+        },
         { field: "datestamp", key: "l", title: "Datestamp", align: "center" },
         { field: "timestamp", key: "m", title: "Timestamp", align: "center" },
       ],
@@ -191,18 +160,30 @@ export default {
       datasets: [
         {
           data: [],
-          label: "Total Score",
+          label: "Score PHQ-9",
           borderColor: "rgba(255, 56, 96, 0.5)",
           backgroundColor: "rgba(255, 56, 96, 0.1)",
         },
+        // {
+        //   data: [],
+        //   label: "Score GAD-7",
+        //   borderColor: "rgba(50, 115, 220, 0.5)",
+        //   backgroundColor: "rgba(50, 115, 220, 0.1)",
+        // },
       ],
       datasets1: [
         {
           data: [],
-          label: "Time Completion",
+          label: "Time Completion PHQ-9",
           borderColor: "rgba(50, 115, 220, 0.5)",
           backgroundColor: "rgba(50, 115, 220, 0.1)",
         },
+        // {
+        //   data: [],
+        //   label: "Score PHQ-9",
+        //   borderColor: "rgba(255, 56, 96, 0.5)",
+        //   backgroundColor: "rgba(255, 56, 96, 0.1)",
+        // },
       ],
       menu: [
         {
@@ -234,6 +215,7 @@ export default {
       responsesLoaded: null,
       patients: null,
       responses: null,
+      GAD7Responses: null,
       email: null,
       name: null,
       surname: null,
@@ -317,16 +299,17 @@ export default {
       }
     },
     async searchResponses(email) {
-      const { data, error } = await supabase
+      const { data: PHQ9Data, error: PHQ9Error } = await supabase
         .from("responses")
         .select("*")
         .like("email", "%" + email + "%");
-      if (error) throw error;
-      this.responses = data;
+      if (PHQ9Error) throw PHQ9Error;
+      this.responses = PHQ9Data;
       this.labels.length = 0;
       this.datasets[0].data.length = 0;
       this.datasets1[0].data.length = 0;
       for (let i = 0; i < this.responses.length; i++) {
+        this.responses[i].email = "PHQ-9";
         this.labels[i] = i + 1;
         this.datasets1[0].data[i] = this.responses[i].time_completion;
         this.datasets[0].data[i] =
@@ -340,11 +323,23 @@ export default {
           this.responses[i].q7 +
           this.responses[i].q8;
       }
+
+      const { data: GAD7Data, error: GAD7Error } = await supabase
+        .from("GAD7")
+        .select("*")
+        .like("email", "%" + email + "%");
+      if (GAD7Error) throw GAD7Error;
+      this.GAD7Responses = GAD7Data;
+      for (let i = 0; i < this.GAD7Responses.length; i++) {
+        this.GAD7Responses[i].email = "GAD-7";
+ 
+      }
+
       // this.labels[this.responses.length] = this.responses.length;
       // this.labels[this.responses.length + 1] = this.responses.length + 1;
       // this.datasets[0].data[0] = null;
       // this.datasets[0].data[this.responses.length + 1] = null;
-      // console.log(this.datasets[0]);
+      // console.log(this.datasets[1]);
     },
     indexToggle(index) {
       // this.toggled.fill(false);
@@ -361,6 +356,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/styles/main.scss";
+
 .home {
   display: flex;
   align-items: center;
@@ -369,136 +366,81 @@ export default {
   flex-direction: column;
   padding-top: 5rem;
   padding-bottom: 5rem;
-}
-
-$primary: #11998e;
-$secondary: #38ef7d;
-$white: #fff;
-$gray: #9b9b9b;
-.form__group {
-  caret-color: black;
-  position: relative;
-  padding: 15px 0 0;
-  margin-top: 10px;
-  width: 20%;
-}
-
-.form__field {
-  font-family: "Roboto", sans-serif;
-  width: 100%;
-  border: 0;
-  border-bottom: 2px solid $gray;
-  outline: 0;
-  font-size: 1.2rem;
-  color: black;
-  padding: 7px 0;
-  background: transparent;
-  transition: border-color 0.2s;
-
-  &::placeholder {
-    color: transparent;
-  }
-
-  &:placeholder-shown ~ .form__label {
-    font-size: 1.3rem;
-    cursor: text;
-    top: 20px;
+  &__title {
+    color: rgb(74, 57, 124);
   }
 }
 
-.form__label {
-  position: absolute;
-  top: 0;
+
+
+.container {
   display: block;
-  transition: 0.2s;
-  font-size: 1rem;
-  color: $gray;
+  margin-top: 1rem;
+  text-align: center;
+  // flex-direction: column;
 }
 
-.form__field:focus {
-  ~ .form__label {
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: 1rem;
-    color: $primary;
-    font-weight: 700;
+.searchButtons {
+  margin-top: 1rem;
+  
+  @include display-less(tablet) {
+    width: 100%;
+    overflow: auto;
   }
-  padding-bottom: 6px;
-  font-weight: 700;
-  border-width: 3px;
-  border-image: linear-gradient(to right, $primary, $secondary);
-  border-image-slice: 1;
-}
-/* reset input */
-.form__field {
-  &:required,
-  &:invalid {
-    box-shadow: none;
-  }
+  // display: flex;
+  
+  // justify-content: space-between;
 }
 
-/* CSS */
-.button-80 {
-  background: paleturquoise;
-  backface-visibility: hidden;
-  border-radius: 0.375rem;
-  border-style: solid;
-  border-width: 0.125rem;
+.box {
+  width: 850px;
+  
+
+  // text-align: center;
+  // align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // flex-direction: column;
+
+}
+
+input[type="text"] {
+  width: 300px;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  outline: none;
+  padding: 8px;
   box-sizing: border-box;
-  color: black;
-  cursor: pointer;
-  display: inline-block;
-  font-family: Circular, Helvetica, sans-serif;
-  font-size: 1.125rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-  padding: 0.875rem 1.125rem;
-  position: relative;
-  text-align: left;
-  text-decoration: none;
-  transform: translateZ(0) scale(1);
-  transition: transform 0.2s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  margin: 1rem;
+  transition: 0.3s;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
 }
 
-.button-80:not(:disabled):hover {
-  transform: scale(1.05);
+input[type="text"]:focus {
+  border-color: dodgerBlue;
+  box-shadow: 0 0 8px 0 dodgerBlue;
 }
 
-.button-80:not(:disabled):hover:active {
-  transform: scale(1.05) translateY(0.125rem);
+.namebox {
+  // width: 280px;
+  // height: 50px;
+  // margin-bottom: 10px;
 }
 
-.button-80:focus {
-  outline: 0 solid transparent;
-}
-
-.button-80:focus:before {
-  content: "";
-  left: calc(-1 * 0.375rem);
-  pointer-events: none;
-  position: absolute;
-  top: calc(-1 * 0.375rem);
-  transition: border-radius;
-  user-select: none;
-}
-
-.button-80:focus:not(:focus-visible) {
-  outline: 0 solid transparent;
-}
-
-.button-80:focus:not(:focus-visible):before {
-  border-width: 0;
-}
-
-.button-80:not(:disabled):active {
-  transform: translateY(0.125rem);
+.box__table {
+  border: 1px solid darkblue;
+  // width: 200px;
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  @include display-less(tablet) {
+    overflow: auto;
+    width: 75%;
+  }
+  
 }
 
 // <!-- HTML !-->
@@ -564,42 +506,70 @@ $gray: #9b9b9b;
   display: none;
 }
 
-.container {
-  margin-top: 1rem;
-  text-align: center;
-  // flex-direction: column;
-}
 
-.searchButtons {
-  margin-top: 1rem;
-  display: flex;
-  // justify-content: space-between;
-}
 
-.box {
-  width: 850px;
-}
 
-input[type="text"] {
-  width: 300px;
-  border: 2px solid #aaa;
-  border-radius: 4px;
-  outline: none;
-  padding: 8px;
+/* CSS */
+.button-80 {
+  background: paleturquoise;
+  backface-visibility: hidden;
+  border-radius: 0.375rem;
+  border-style: solid;
+  border-width: 0.125rem;
   box-sizing: border-box;
-  transition: 0.3s;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.2rem;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular, Helvetica, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  padding: 0.875rem 1.125rem;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transform: translateZ(0) scale(1);
+  transition: transform 0.2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 1rem;
 }
 
-input[type="text"]:focus {
-  border-color: dodgerBlue;
-  box-shadow: 0 0 8px 0 dodgerBlue;
+.button-80:not(:disabled):hover {
+  transform: scale(1.05);
 }
 
-.namebox {
-  // width: 280px;
-  // height: 50px;
-  margin-top: 10px;
+.button-80:not(:disabled):hover:active {
+  transform: scale(1.05) translateY(0.125rem);
 }
+
+.button-80:focus {
+  outline: 0 solid transparent;
+}
+
+.button-80:focus:before {
+  content: "";
+  left: calc(-1 * 0.375rem);
+  pointer-events: none;
+  position: absolute;
+  top: calc(-1 * 0.375rem);
+  transition: border-radius;
+  user-select: none;
+}
+
+.button-80:focus:not(:focus-visible) {
+  outline: 0 solid transparent;
+}
+
+.button-80:focus:not(:focus-visible):before {
+  border-width: 0;
+}
+
+.button-80:not(:disabled):active {
+  transform: translateY(0.125rem);
+}
+
+
 </style>
