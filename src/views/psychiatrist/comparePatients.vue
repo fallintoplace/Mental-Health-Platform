@@ -1,11 +1,7 @@
 <template>
   <div class="home">
     <sidebar-menu :menu="menu" :collapsed="true" />
-    <toggle-switch
-      :options="myOptions"
-      v-model="toggle"
-      @change="refetchData()"
-    />
+    <toggle-switch :options="myOptions" v-model="toggle" />
     <h1 class="home__title">Compare Patients</h1>
     <h2>Score frequencies of Male and Female</h2>
     <div>
@@ -34,6 +30,43 @@
         <PuSkeleton circle height="350px" width="800px" v-else />
       </div>
     </div>
+    <!-- ------------------------------------------ -->
+    <h2>Custom patients comparison</h2>
+    <template v-if="isLoaded">
+      <div v-for="(patient, index) in patients" :key="index" class="container">
+        <div class="home__member">
+          {{ patient.email }}
+          <toggle-switch
+            :options="memberOptions"
+            :group="patient.email"
+            v-model="memberToggle[index]"
+            @change="recountMember"
+          />
+        </div>
+      </div>
+      <div>
+        <div v-if="toggle === 'PHQ-9'" class="box__gender">
+          <line-chart
+            :width="800"
+            :labels="labels"
+            :datasets="phq9_group_datasets"
+            :options="options"
+            :key="componentKey"
+          ></line-chart>
+        </div>
+      </div>
+      <div>
+        <div v-if="toggle === 'GAD-7'" class="box__gender">
+          <line-chart
+            :width="800"
+            :labels="GAD7_labels"
+            :datasets="gad7_group_datasets"
+            :options="GAD7_options"
+            :key="componentKey"
+          ></line-chart>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -47,7 +80,7 @@ export default {
     let title = "Compare Patients" + " (" + this.toggle + ")";
 
     return { title };
-    },
+  },
   created() {
     this.menu[0].title = this.getEmail;
     this.fetchData();
@@ -56,6 +89,81 @@ export default {
     LineChart,
   },
   methods: {
+    recountMember() {
+      var Map = {};
+      for (let i = 0; i < this.patients.length; i++) {
+        Map[this.patients[i].email] = this.memberToggle[i];
+      }
+      for (let i = 0; i < 28; i++) {
+        this.phq9_group_datasets[0].data[i] = 0;
+        this.phq9_group_datasets[1].data[i] = 0;
+        this.phq9_group_datasets[2].data[i] = 0;
+      }
+      for (let i = 0; i < this.responses.length; i++) {
+        let totalScore = 0;
+        totalScore += this.responses[i].q0;
+        totalScore += this.responses[i].q1;
+        totalScore += this.responses[i].q2;
+        totalScore += this.responses[i].q3;
+        totalScore += this.responses[i].q4;
+        totalScore += this.responses[i].q5;
+        totalScore += this.responses[i].q6;
+        totalScore += this.responses[i].q7;
+        totalScore += this.responses[i].q8;
+        if (Map[this.responses[i].email] === "Group 1")
+          this.phq9_group_datasets[0].data[totalScore]++;
+        else if (Map[this.responses[i].email] === "Group 2")
+          this.phq9_group_datasets[1].data[totalScore]++;
+        else if (Map[this.responses[i].email] === "Group 3")
+          this.phq9_group_datasets[2].data[totalScore]++;
+      }
+      var sum = { data0: 0, data1: 0, data2: 0 };
+      for (let i = 0; i < 28; i++) {
+        sum.data0 += this.phq9_group_datasets[0].data[i];
+        sum.data1 += this.phq9_group_datasets[1].data[i];
+        sum.data2 += this.phq9_group_datasets[2].data[i];
+      }
+      for (let i = 0; i < 28; i++) {
+        if (sum.data0 > 0) this.phq9_group_datasets[0].data[i] /= sum.data0;
+        if (sum.data1 > 0) this.phq9_group_datasets[1].data[i] /= sum.data1;
+        if (sum.data2 > 0) this.phq9_group_datasets[2].data[i] /= sum.data2;
+      }
+      //-------------------------------------------
+      for (let i = 0; i < 22; i++) {
+        this.gad7_group_datasets[0].data[i] = 0;
+        this.gad7_group_datasets[1].data[i] = 0;
+        this.gad7_group_datasets[2].data[i] = 0;
+      }
+      for (let i = 0; i < this.GAD7_responses.length; i++) {
+        let totalScore = 0;
+
+        totalScore += this.GAD7_responses[i].q0;
+        totalScore += this.GAD7_responses[i].q1;
+        totalScore += this.GAD7_responses[i].q2;
+        totalScore += this.GAD7_responses[i].q3;
+        totalScore += this.GAD7_responses[i].q4;
+        totalScore += this.GAD7_responses[i].q5;
+        totalScore += this.GAD7_responses[i].q6;
+        if (Map[this.GAD7_responses[i].email] === "Group 1")
+          this.gad7_group_datasets[0].data[totalScore]++;
+        if (Map[this.GAD7_responses[i].email] === "Group 2")
+          this.gad7_group_datasets[1].data[totalScore]++;
+        if (Map[this.GAD7_responses[i].email] === "Group 3")
+          this.gad7_group_datasets[2].data[totalScore]++;
+      }
+      sum = { data0: 0, data1: 0, data2: 0  };
+      for (let i = 0; i < 22; i++) {
+        sum.data0 += this.gad7_group_datasets[0].data[i];
+        sum.data1 += this.gad7_group_datasets[1].data[i];
+        sum.data2 += this.gad7_group_datasets[2].data[i];
+      }
+      for (let i = 0; i < 22; i++) {
+        if (sum.data0 > 0) this.gad7_group_datasets[0].data[i] /= sum.data0;
+        if (sum.data1 > 0) this.gad7_group_datasets[1].data[i] /= sum.data1;
+        if (sum.data2 > 0) this.gad7_group_datasets[2].data[i] /= sum.data2;
+      }
+      this.componentKey += 1;
+    },
     async fetchData() {
       // eslint-disable-next-line no-unused-vars
       const { data, _ } = await supabase.from("patients").select("*");
@@ -71,8 +179,8 @@ export default {
       const { data: GAD7_temp, ____ } = await supabase.from("GAD7").select("*");
       this.GAD7_responses = GAD7_temp;
       // console.dir(this.responses);
-      
-//--------------------------------------
+
+      //--------------------------------------
 
       var Map = {};
       for (let i = 0; i < this.patients.length; i++) {
@@ -98,15 +206,21 @@ export default {
         totalScore += this.responses[i].q8;
         if (Map[this.responses[i].email] === "Male")
           this.datasets[0].data[totalScore]++;
-        else this.datasets[1].data[totalScore]++;
+        else if (Map[this.responses[i].email] === "Female")
+          this.datasets[1].data[totalScore]++;
       }
-//-------------------------------------------
-      // Map = {};
-      // for (let i = 0; i < this.patients.length; i++) {
-      //   Map[this.patients[i].email] = this.patients[i].gender;
-      //   // console.log(this.patients[i]);
-      //   // console.log(Map[this.patients[i].email]);
-      // }
+
+      var sum = { data0: 0, data1: 0 };
+      for (let i = 0; i < 28; i++) {
+        sum.data0 += this.datasets[0].data[i];
+        sum.data1 += this.datasets[1].data[i];
+      }
+      for (let i = 0; i < 28; i++) {
+        if (sum.data0 > 0) this.datasets[0].data[i] /= sum.data0;
+        if (sum.data1 > 0) this.datasets[1].data[i] /= sum.data1;
+      }
+
+      //-------------------------------------------
       for (let i = 0; i < 22; i++) {
         this.GAD7_labels[i] = i;
         this.GAD7_datasets[0].data[i] = 0;
@@ -123,9 +237,19 @@ export default {
         totalScore += this.GAD7_responses[i].q6;
         if (Map[this.GAD7_responses[i].email] === "Male")
           this.GAD7_datasets[0].data[totalScore]++;
-        else this.GAD7_datasets[1].data[totalScore]++;
+        else if (Map[this.GAD7_responses[i].email] === "Female")
+          this.GAD7_datasets[1].data[totalScore]++;
       }
 
+      sum = { data0: 0, data1: 0 };
+      for (let i = 0; i < 22; i++) {
+        sum.data0 += this.GAD7_datasets[0].data[i];
+        sum.data1 += this.GAD7_datasets[1].data[i];
+      }
+      for (let i = 0; i < 22; i++) {
+        if (sum.data0 > 0) this.GAD7_datasets[0].data[i] /= sum.data0;
+        if (sum.data1 > 0) this.GAD7_datasets[1].data[i] /= sum.data1;
+      }
 
       this.isLoaded = true;
       this.GAD7_isLoaded = true;
@@ -137,6 +261,9 @@ export default {
   },
   data() {
     return {
+      componentKey: 0,
+      custom_phq9_loaded: null,
+      custom_gad7_loaded: null,
       myOptions: {
         layout: {
           color: "black",
@@ -170,17 +297,52 @@ export default {
           ],
         },
       },
+      memberOptions: {
+        layout: {
+          color: "black",
+          backgroundColor: "white",
+          selectedColor: "white",
+          selectedBackgroundColor: "green",
+          borderColor: "black",
+          fontFamily: "Calibri",
+          fontWeight: "normal",
+          fontWeightSelected: "bold",
+          squareCorners: false,
+          noBorder: false,
+        },
+        size: {
+          fontSize: 1,
+          height: 2,
+          padding: 0.3,
+          width: 20,
+        },
+        items: {
+          delay: 0.4,
+          disabled: false,
+          preSelected: "No Group",
+          labels: [
+            {
+              name: "No Group",
+              color: "black",
+              backgroundColor: "lightgrey",
+            },
+            { name: "Group 1", color: "black", backgroundColor: "lightblue" },
+            { name: "Group 2", color: "black", backgroundColor: "pink" },
+            { name: "Group 3", color: "black", backgroundColor: "lightgreen" },
+          ],
+        },
+      },
       toggle: null,
       isLoaded: null,
       GAD7_isLoaded: null,
-      patients: null,
-      responses: null,
+      patients: [],
+      responses: [],
+      memberToggle: [],
       options: {
         scales: {
           yAxes: [
             {
               ticks: {
-                precision: 0,
                 beginAtZero: true,
               },
             },
@@ -192,7 +354,6 @@ export default {
           yAxes: [
             {
               ticks: {
-                precision: 0,
                 beginAtZero: true,
               },
             },
@@ -214,6 +375,47 @@ export default {
 
           borderColor: "rgba(255, 56, 96, 0.5)",
           backgroundColor: "rgba(255, 56, 96, 0.1)",
+        },
+      ],
+      phq9_group_datasets: [
+        {
+          data: [],
+          label: "Group 1",
+          borderColor: "rgba(50, 115, 220, 0.5)",
+          backgroundColor: "rgba(50, 115, 220, 0.1)",
+        },
+        {
+          data: [],
+          label: "Group 2",
+
+          borderColor: "rgba(255, 56, 96, 0.5)",
+          backgroundColor: "rgba(255, 56, 96, 0.1)",
+        },
+        {
+          data: [],
+          label: "Group 3",
+          borderColor: "rgb(50, 205, 50, 0.5)",
+          backgroundColor: "rgb(50, 205, 50, 0.1)",
+        },
+      ],
+      gad7_group_datasets: [
+        {
+          data: [],
+          label: "Group 1",
+          borderColor: "rgba(50, 115, 220, 0.5)",
+          backgroundColor: "rgba(50, 115, 220, 0.1)",
+        },
+        {
+          data: [],
+          label: "Group 2",
+          borderColor: "rgba(255, 56, 96, 0.5)",
+          backgroundColor: "rgba(255, 56, 96, 0.1)",
+        },
+        {
+          data: [],
+          label: "Group 3",
+          borderColor: "rgb(50, 205, 50, 0.5)",
+          backgroundColor: "rgb(50, 205, 50, 0.1)",
         },
       ],
       GAD7_datasets: [
@@ -272,8 +474,21 @@ export default {
   min-height: calc(100vh - 60px);
   flex-direction: column;
   padding-bottom: 5rem;
+  padding-top: 1rem;
   &__title {
     color: rgb(74, 57, 124);
+  }
+  &__member {
+    font-size: var(--font-size-big);
+    font-weight: bold;
+    display: flex;
+    // column-count: 2;
+    color: rgb(74, 57, 124);
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    // flex-direction: column;
+    margin-bottom: 0.2rem;
   }
 }
 

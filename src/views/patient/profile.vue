@@ -127,7 +127,7 @@ export default {
         .from("patients")
         .select("*")
         .like("email", "%" + this.getEmail + "%");
-      console.table(data);
+      // console.table(data);
       // console.log(data[0].gender);
       if (data[0].gender) this.selectedGender = data[0].gender;
       if (data[0].date_of_birth)

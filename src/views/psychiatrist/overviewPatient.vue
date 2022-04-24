@@ -502,7 +502,7 @@ export default {
       }
 
       const { data: GAD7Data, error: GAD7Error } = await supabase.from("GAD7");
-      console.log(GAD7Data);
+      // console.log(GAD7Data);
       // console.log(error);
       len = GAD7Data.length;
       for (let i = 0; i < 8; i++) {
