@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <sidebar-menu :menu="menu"  :width="'10rem'" />
+    <sidebar-menu :menu="menu" :width="'15rem'" />
     <questionnaire-card :value="questionnaire" :number="numberOfQuestions" />
     <footer>
       <toggle-switch

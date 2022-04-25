@@ -1,54 +1,54 @@
 <template>
   <div class="home">
     <div class="box">
-    <sidebar-menu :menu="menu" :collapsed="true" />
-    <h2 class="home__title">Personal Information</h2>
-    <div>Email: {{ this.menu[0].title }}</div>
-    <br />
-    Name: {{ name }} {{ surname }}
-    <div class="namebox">
-      <input type="text" placeholder="Name" v-model="newName" />
-      <input type="text" placeholder="Surname" v-model="newSurname" />
-    </div>
+    <sidebar-menu :menu="menu" :width="'15rem'" />
+      <h2 class="home__title">Personal Information</h2>
+      <div>Email: {{ this.menu[0].title }}</div>
+      <br />
+      Name: {{ name }} {{ surname }}
+      <div class="namebox">
+        <input type="text" placeholder="Name" v-model="newName" />
+        <input type="text" placeholder="Surname" v-model="newSurname" />
+      </div>
 
-    Gender: {{ selectedGender }}
-    <label class="select" for="slct">
-      <select id="slct" required="required" v-model="newGender">
-        <option value="null" disabled="disabled" selected="selected" hidden>
-          Your Gender
-        </option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Other">Other</option>
-      </select>
-      <svg>
-        <use xlink:href="#select-arrow-down"></use>
+      Gender: {{ selectedGender }}
+      <label class="select" for="slct">
+        <select id="slct" required="required" v-model="newGender">
+          <option value="null" disabled="disabled" selected="selected" hidden>
+            Your Gender
+          </option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <svg>
+          <use xlink:href="#select-arrow-down"></use>
+        </svg>
+      </label>
+      <svg class="sprites">
+        <symbol id="select-arrow-down" viewbox="0 0 10 6">
+          <polyline points="1 1 5 5 9 1"></polyline>
+        </symbol>
       </svg>
-    </label>
-    <svg class="sprites">
-      <symbol id="select-arrow-down" viewbox="0 0 10 6">
-        <polyline points="1 1 5 5 9 1"></polyline>
-      </symbol>
-    </svg>
-    <label for="dateofbirth"> Date Of Birth: {{ selectedDOB }} </label>
-    <input
-      type="date"
-      id="dateofbirth"
-      class="datePicker"
-      v-model="dateOfBirth"
-      max="2007-12-31"
-    />
+      <label for="dateofbirth"> Date Of Birth: {{ selectedDOB }} </label>
+      <input
+        type="date"
+        id="dateofbirth"
+        class="datePicker"
+        v-model="dateOfBirth"
+        max="2007-12-31"
+      />
 
-    <button
-      class="button-3"
-      role="button"
-      @click="
-        changeSaveMessage();
-        updateGender();
-      "
-    >
-      {{ saveMessage }}
-    </button>
+      <button
+        class="button-3"
+        role="button"
+        @click="
+          changeSaveMessage();
+          updateGender();
+        "
+      >
+        {{ saveMessage }}
+      </button>
     </div>
   </div>
 </template>
@@ -177,7 +177,6 @@ export default {
   justify-content: center;
   min-height: calc(100vh - 60px);
   flex-direction: column;
-  font-family: "Roboto", sans-serif;
   &__title {
     color: rgb(74, 57, 124);
   }
@@ -190,9 +189,6 @@ export default {
   font-family: "Roboto", sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-}
 .select {
   position: relative;
   min-width: 200px;
@@ -339,5 +335,4 @@ input[type="text"]:focus {
     rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
     rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 }
-
 </style>

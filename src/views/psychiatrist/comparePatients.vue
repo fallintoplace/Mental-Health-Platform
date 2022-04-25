@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <sidebar-menu :menu="menu" :collapsed="true" />
+    <sidebar-menu :menu="menu" :width="'15rem'" />
     <toggle-switch :options="myOptions" v-model="toggle" />
     <h1 class="home__title">Compare Patients</h1>
     <h2>Score frequencies of Male and Female</h2>
@@ -456,7 +456,7 @@ export default {
         },
         {
           href: "/",
-          title: "Log Out",
+          title: "Exit",
           icon: "fas fa-sign-out-alt",
         },
       ],

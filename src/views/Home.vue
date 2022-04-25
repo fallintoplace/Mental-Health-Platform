@@ -1,12 +1,9 @@
 <template>
   <div class="home">
-    <sidebar-menu :menu="menu" :width="'10rem'" />
-    <div class="box">
-      <h2 class="home__title">
-        Patient Health Questionnaire 9 (PHQ-9)
-      </h2>
+    <sidebar-menu :menu="menu" :width="'15rem'" />
+    <div class="home__box">
+      <h2 class="home__title">Patient Health Questionnaire 9 (PHQ-9)</h2>
       <h3>What's your role?</h3>
-      <!-- <h1>{{patient.username}}</h1> -->
       <toggle-switch :options="myOptions" v-model="toggle" />
       <div v-if="toggle == 'Psychiatrist'">
         <div class="form__group field">
@@ -21,18 +18,6 @@
           />
           <label for="name" class="form__label">Email</label>
         </div>
-        <!-- <div class="form__group field">
-          <input
-            type="input"
-            class="form__field"
-            placeholder="Name"
-            name="name"
-            id="name"
-            v-model="psychiatrist.password"
-            required
-          />
-          <label for="name" class="form__label">Password</label>
-        </div> -->
 
         <router-link to="/overviewPatient">
           <button
@@ -61,19 +46,6 @@
           />
           <label for="name" class="form__label">Email</label>
         </div>
-
-        <!-- <div class="form__group field">
-          <input
-            type="input"
-            class="form__field"
-            placeholder="Name"
-            name="name"
-            id="name"
-            v-model="patient.password"
-            required
-          />
-          <label for="name" class="form__label">Password</label>
-        </div> -->
 
         <router-link to="/PHQ9">
           <button
@@ -135,11 +107,6 @@ export default {
           title: "SUS Feedback",
           icon: "far fa-comment-dots",
         },
-        // {
-        //   href: "/about",
-        //   title: "About",
-        //   icon: "far fa-question-circle",
-        // },
       ],
       guestEmail: "guest@tum.de",
       psychiatrist: {
@@ -194,10 +161,6 @@ export default {
     };
   },
 
-  mounted() {
-    // this.fetchQuestionnaire();
-  },
-
   computed: {
     ...mapGetters("questionnaire", {
       questionnaire: TYPES.GET_QUESTIONNAIRE,
@@ -216,18 +179,7 @@ export default {
   methods: {
     ...mapMutations(["setEmail"]),
     ...mapMutations(["resetData"]),
-
-    submitForm() {},
-    // ...mapActions("questionnaire", ["fetchQuestionnaire"]),
   },
-
-  // metaInfo() {
-  //   const title = !this.questionnaire
-  //     ? "Questionnaire"
-  //     : this.questionnaire.name;
-
-  //   return { title };
-  // },
 };
 </script>
 
@@ -244,16 +196,24 @@ $block: ".home";
   &__title {
     color: rgb(74, 57, 124);
   }
+  &__box {
+    border: 2px solid black;
+    height: 550px;
+    width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    @include display-less(phablet) {
+      width: 75%;
+      overflow: auto;
+    }
+  }
 }
-
-
-
-// input {
-//   font-size: 1em;
-//   padding: 5px 0;
-//   margin: 10px 0 5px 0;
-//   width: 100%;
-// }
 
 $primary: #11998e;
 $secondary: #38ef7d;
@@ -266,7 +226,6 @@ $gray: #9b9b9b;
   margin-top: 20px;
   margin-bottom: 10px;
   width: 300px;
-  
 }
 
 .form__field {
@@ -280,7 +239,6 @@ $gray: #9b9b9b;
   padding: 7px 0;
   background: transparent;
   transition: border-color 0.2s;
-  
 
   &::placeholder {
     color: transparent;
@@ -311,7 +269,6 @@ $gray: #9b9b9b;
     font-size: 1rem;
     color: $primary;
     font-weight: 700;
-
   }
 
   padding-bottom: 6px;
@@ -319,7 +276,6 @@ $gray: #9b9b9b;
   border-width: 3px;
   border-image: linear-gradient(to right, $primary, $secondary);
   border-image-slice: 1;
-
 }
 /* reset input */
 .form__field {
@@ -328,27 +284,6 @@ $gray: #9b9b9b;
     box-shadow: none;
   }
 }
-
-.box {
-  border: 2px solid black;
-  height: 550px;
-  width: 450px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border-radius: 25px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
-    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
-    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
-  @include display-less(phablet) {
-    width: 75%;
-    overflow: auto;
-  }
-}
-
-
-
 
 button {
   background-color: #ffffff;
@@ -386,5 +321,4 @@ button:focus {
 button:focus-visible {
   box-shadow: none;
 }
-
 </style>

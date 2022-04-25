@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <sidebar-menu :menu="menu" :collapsed="true" />
+    <sidebar-menu :menu="menu" :width="'15rem'" />
     <toggle-switch
       :options="myOptions"
       v-model="toggle"
@@ -165,7 +165,7 @@ export default {
         },
         {
           href: "/",
-          title: "Log Out",
+          title: "Exit",
           icon: "fas fa-sign-out-alt",
         },
       ],

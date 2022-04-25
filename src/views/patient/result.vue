@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <sidebar-menu :menu="menu" :collapsed="true" />
+    <sidebar-menu :menu="menu" :width="'15rem'" />
     <vue-ellipse-progress
       :progress="tasksDonePercent"
       :color="gradient"

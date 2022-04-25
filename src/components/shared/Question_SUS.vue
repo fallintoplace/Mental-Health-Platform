@@ -82,7 +82,7 @@
         <div class="question__note">
           {{ noteText }}
         </div>
-        <div class="question__submit">
+        <!-- <div class="question__submit">
           <ui-button
             type="warning"
             outlined
@@ -91,7 +91,7 @@
           >
             Enter <span class="question__enter-icon">↵</span>
           </ui-button>
-        </div>
+        </div> -->
       </footer>
     </div>
   </section>
@@ -139,6 +139,8 @@ export default {
 
   computed: {
     ...mapGetters(["getResults"]),
+    ...mapGetters(["getDatestamp"]),
+    ...mapGetters(["getTimestamp"]),
 
     classes() {
       const result = [
@@ -213,11 +215,11 @@ export default {
         return "Enter something or skip";
       } else {
         if (this.typeOfControl === "radio") {
-          return "* Please choose any option";
+          return "* You may use 🖯; key 0, 1, 2, 3, 4; or ←, →";
         }
 
         if (this.typeOfControl === "checkbox") {
-          return "* Please choose any options";
+          return "* You may use 🖯; key 0, 1, 2, 3, 4; or ←, →";
         }
 
         return "* This option is required";
@@ -333,6 +335,9 @@ export default {
           q7: this.getResults[7],
           q8: this.getResults[8],
           q9: this.getResults[9],
+          datestamp: this.getDatestamp,
+          timestamp: this.getTimestamp,
+          total_score: +this.getResults[0] + +this.getResults[2] + +this.getResults[4] + +this.getResults[6] + +this.getResults[8] - this.getResults[1] - this.getResults[3] - this.getResults[5] - this.getResults[7] - this.getResults[9] - 5 + 20,
         },
       ]);
       console.log(data);

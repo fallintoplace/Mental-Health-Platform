@@ -93,7 +93,7 @@
         <div class="question__note">
           {{ noteText }}
         </div>
-        <div class="question__submit">
+        <!-- <div class="question__submit">
           <ui-button
             type="warning"
             outlined
@@ -102,7 +102,7 @@
           >
             Enter <span class="question__enter-icon">↵</span>
           </ui-button>
-        </div>
+        </div> -->
       </footer>
     </div>
   </section>
@@ -226,7 +226,7 @@ export default {
 
       if (!this.value.required) {
         if (this.typeOfControl === "radio") {
-          return "You can choose any option or skip";
+          return (this.getLanguage === "English"? "You can choose any option or skip" : "Sie können jede Option wählen oder überspringen");
         }
 
         if (this.typeOfControl === "checkbox") {
@@ -236,11 +236,11 @@ export default {
         return "Enter something or skip";
       } else {
         if (this.typeOfControl === "radio") {
-          return "* Please choose any option";
+          return (this.getLanguage === "English"? "* You may use 🖯; key 0, 1, 2, 3; or ←, →" : "* Sie können 🖯; Taste 0, 1, 2, 3; oder ←, → verwenden.");
         }
 
         if (this.typeOfControl === "checkbox") {
-          return "* Please choose any options";
+          return "You may use 🖯; key 0, 1, 2, 3, 4; or ←, →";
         }
 
         return "* This option is required";

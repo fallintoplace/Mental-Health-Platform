@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <sidebar-menu :menu="menu" :collapsed="true" />
+    <sidebar-menu :menu="menu" :width="'15rem'" />
     <h1 class="home__title">Track Patient</h1>
     <div class="namebox">
       <input type="text" placeholder="Email" v-model="email" />
@@ -252,10 +252,9 @@ export default {
         },
         {
           href: "/",
-          title: "Log Out",
+          title: "Exit",
           icon: "fas fa-sign-out-alt",
         },
-
       ],
       responsesLoaded: null,
       patients: null,
