@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <sidebar-menu :menu="menu" :width="'15rem'" />
+    <sidebar-menu :menu="menu" :width="'12rem'" />
     <toggle-switch :options="myOptions" v-model="toggle" />
     <h1 class="home__title">Compare Patients</h1>
     <h2>Score frequencies of Male and Female</h2>
@@ -82,7 +82,7 @@ export default {
     return { title };
   },
   created() {
-    this.menu[0].title = this.getEmail;
+    // this.menu[0].title = this.getEmail;
     this.fetchData();
   },
   components: {

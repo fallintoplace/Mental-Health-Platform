@@ -1,6 +1,6 @@
 <template>
   <div class="questionnaire">
-    <sidebar-menu :menu="menu" :collapsed="true" />
+    <sidebar-menu :menu="menu" :width="'15rem'" :collapsed="true" />
     <stepper
       v-if="questions"
       :total="questions.length - 1"

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <sidebar-menu :menu="menu" :width="'15rem'" />
+    <sidebar-menu :menu="menu" :width="'12rem'" />
     <div class="home__box">
       <h2 class="home__title">Patient Health Questionnaire 9 (PHQ-9)</h2>
       <h3>What's your role?</h3>

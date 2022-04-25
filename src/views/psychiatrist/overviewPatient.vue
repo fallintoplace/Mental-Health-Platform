@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <sidebar-menu :menu="menu" :width="'15rem'" />
+    <sidebar-menu :menu="menu" :width="'12rem'" />
     <toggle-switch
       :options="myOptions"
       v-model="toggle"
@@ -467,7 +467,7 @@ export default {
   },
   created() {
     this.toggle = "PHQ-9";
-    this.menu[0].title = this.getEmail;
+    // this.menu[0].title = this.getEmail;
     this.fetchFillingFrequencies();
     this.fetchCountryData();
     this.fetchDevice();

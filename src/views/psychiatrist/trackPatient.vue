@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <sidebar-menu :menu="menu" :width="'15rem'" />
+    <sidebar-menu :menu="menu" :width="'12rem'" />
     <h1 class="home__title">Track Patient</h1>
     <div class="namebox">
       <input type="text" placeholder="Email" v-model="email" />
@@ -267,7 +267,7 @@ export default {
     };
   },
   created() {
-    this.menu[0].title = this.getEmail;
+    // this.menu[0].title = this.getEmail;
   },
   computed: {
     ...mapGetters(["getEmail"]),
