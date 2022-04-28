@@ -440,11 +440,6 @@ export default {
           hiddenOnCollapse: true,
         },
         {
-          href: "/overviewPatient",
-          title: "Overview Dashboard",
-          icon: "fas fa-users",
-        },
-        {
           href: "/trackPatient",
           title: "Track Patient",
           icon: "fas fa-user",
@@ -453,6 +448,11 @@ export default {
           href: "/comparePatients",
           title: "Compare Patients",
           icon: "fas fa-user-friends",
+        },
+        {
+          href: "/overviewPatient",
+          title: "Statistics",
+          icon: "fas fa-users",
         },
         {
           href: "/",

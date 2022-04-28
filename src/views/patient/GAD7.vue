@@ -78,6 +78,11 @@ export default {
           icon: "far fa-copy",
         },
         {
+          href: "/calendar",
+          title: "Calendar",
+          icon: "far fa-calendar-alt",
+        },
+        {
           href: "/profile",
           title: "Edit Profile",
           icon: "fas fa-user-cog",

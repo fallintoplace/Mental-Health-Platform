@@ -215,11 +215,11 @@ export default {
         return "Enter something or skip";
       } else {
         if (this.typeOfControl === "radio") {
-          return "* You may use 🖯; key 0, 1, 2, 3, 4; or ←, →";
+          return "* You may use mouse click; key 0, 1, 2, 3, 4; or ←, →";
         }
 
         if (this.typeOfControl === "checkbox") {
-          return "* You may use 🖯; key 0, 1, 2, 3, 4; or ←, →";
+          return "* You may use 🖱️; key 0, 1, 2, 3, 4; or ←, →";
         }
 
         return "* This option is required";

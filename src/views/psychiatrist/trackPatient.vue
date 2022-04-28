@@ -46,15 +46,19 @@
 
       <div v-show="toggled[index]" class="box">
         <div class="box__table">
-          <ve-table :columns="columns" :table-data="responses" />
-        </div>
-        <div class="box__table">
           <line-chart
             :labels="labels"
             :datasets="datasets"
             :options="options"
           ></line-chart>
         </div>
+        <div class="box__table">
+          <ve-table
+            :columns="phq9_columns"
+            :table-data="responses"
+          />
+        </div>
+
         <!-- <div class="box__table">
           <line-chart
             :labels="labels"
@@ -63,14 +67,14 @@
           ></line-chart>
         </div> -->
         <div class="box__table">
-          <ve-table :columns="columns" :table-data="GAD7Responses" />
-        </div>
-        <div class="box__table">
           <line-chart
             :labels="GAD7_labels"
             :datasets="GAD7_datasets"
             :options="GAD7_options"
           ></line-chart>
+        </div>
+        <div class="box__table">
+          <ve-table :columns="gad7_columns" :table-data="GAD7Responses" />
         </div>
         <!-- <div class="box__table">
           <line-chart
@@ -105,8 +109,16 @@ export default {
   },
   data() {
     return {
+      cellStyleOption: {
+        // eslint-disable-next-line no-unused-vars
+        bodyCellClass: ({ row, column, rowIndex }) => {
+          if (column.field === "hobby") {
+            return "table-body-cell-class1";
+          }
+        },
+      },
       currentEmail: null,
-      columns: [
+      phq9_columns: [
         { field: "email", key: "a", title: "Type", align: "center" },
         { field: "q0", key: "b", title: "Q1", align: "center" },
         { field: "q1", key: "c", title: "Q2", align: "center" },
@@ -118,7 +130,57 @@ export default {
         { field: "q7", key: "i", title: "Q8", align: "center" },
         { field: "q8", key: "j", title: "Q9", align: "center" },
         { field: "q9", key: "o", title: "Q10", align: "center" },
-        { field: "total_score", key: "n", title: "Score", align: "center" },
+        {
+          field: "total_score",
+          key: "n",
+          title: "Score",
+          align: "center",
+          // eslint-disable-next-line no-unused-vars
+          renderBodyCell: ({ row, column, rowIndex }, h) => {
+            const cellData = row[column.field];
+            return (
+              <div style="background: #1C1C5D;">
+                <span style="color: white;">{cellData}</span>
+              </div>
+            );
+          },
+        },
+        {
+          field: "time_completion",
+          key: "k",
+          title: "Time Completion",
+          align: "center",
+        },
+        { field: "datestamp", key: "l", title: "Datestamp", align: "center" },
+        { field: "timestamp", key: "m", title: "Timestamp", align: "center" },
+      ],
+      gad7_columns: [
+        { field: "email", key: "a", title: "Type", align: "center" },
+        { field: "q0", key: "b", title: "Q1", align: "center" },
+        { field: "q1", key: "c", title: "Q2", align: "center" },
+        { field: "q2", key: "d", title: "Q3", align: "center" },
+        { field: "q3", key: "e", title: "Q4", align: "center" },
+        { field: "q4", key: "f", title: "Q5", align: "center" },
+        { field: "q5", key: "g", title: "Q6", align: "center" },
+        { field: "q6", key: "h", title: "Q7", align: "center" },
+        { field: "q7", key: "i", title: "Q8", align: "center" },
+        { field: "q8", key: "j", title: "Q9", align: "center" },
+        { field: "q9", key: "o", title: "Q10", align: "center" },
+        {
+          field: "total_score",
+          key: "n",
+          title: "Score",
+          align: "center",
+          // eslint-disable-next-line no-unused-vars
+          renderBodyCell: ({ row, column, rowIndex }, h) => {
+            const cellData = row[column.field];
+            return (
+              <div style="background: #D41F16;">
+                <span style="color: white;">{cellData}</span>
+              </div>
+            );
+          },
+        },
         {
           field: "time_completion",
           key: "k",
@@ -224,7 +286,7 @@ export default {
         {
           data: [],
           label: "Time Completion GAD-7",
-          
+
           borderColor: "rgba(255, 56, 96, 0.5)",
           backgroundColor: "rgba(255, 56, 96, 0.1)",
         },
@@ -236,11 +298,6 @@ export default {
           hiddenOnCollapse: true,
         },
         {
-          href: "/overviewPatient",
-          title: "Overview Dashboard",
-          icon: "fas fa-users",
-        },
-        {
           href: "/trackPatient",
           title: "Track Patient",
           icon: "fas fa-user",
@@ -249,6 +306,11 @@ export default {
           href: "/comparePatients",
           title: "Compare Patients",
           icon: "fas fa-user-friends",
+        },
+        {
+          href: "/overviewPatient",
+          title: "Statistics",
+          icon: "fas fa-users",
         },
         {
           href: "/",
@@ -384,7 +446,6 @@ export default {
           this.GAD7Responses[i].q5 +
           this.GAD7Responses[i].q6;
       }
-
     },
     indexToggle(index) {
       // this.toggled.fill(false);
@@ -417,8 +478,6 @@ export default {
   }
 }
 
-
-
 .container {
   display: block;
   margin-top: 1rem;
@@ -428,19 +487,18 @@ export default {
 
 .searchButtons {
   margin-top: 1rem;
-  
+
   // @include display-less(tablet) {
   //   width: 100%;
   //   overflow: auto;
   // }
   // display: flex;
-  
+
   // justify-content: space-between;
 }
 
 .box {
   width: 850px;
-  
 
   // text-align: center;
   // align-items: center;
@@ -451,7 +509,6 @@ export default {
     // width: 100%;
     overflow: auto;
   }
-
 }
 
 input[type="text"] {
@@ -490,7 +547,6 @@ input[type="text"]:focus {
     overflow: auto;
     width: 75%;
   }
-  
 }
 
 // <!-- HTML !-->
@@ -556,9 +612,6 @@ input[type="text"]:focus {
   display: none;
 }
 
-
-
-
 /* CSS */
 .button-80 {
   background: paleturquoise;
@@ -620,6 +673,13 @@ input[type="text"]:focus {
 .button-80:not(:disabled):active {
   transform: translateY(0.125rem);
 }
+.table-body-cell-class1 {
+  background: #91d5ff !important;
+  color: #fff !important;
+}
 
-
+.table-body-cell-class2 {
+  background: orange !important;
+  color: #fff !important;
+}
 </style>

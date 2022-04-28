@@ -236,11 +236,11 @@ export default {
         return "Enter something or skip";
       } else {
         if (this.typeOfControl === "radio") {
-          return (this.getLanguage === "English"? "* You may use 🖯; key 0, 1, 2, 3; or ←, →" : "* Sie können 🖯; Taste 0, 1, 2, 3; oder ←, → verwenden.");
+          return (this.getLanguage === "English"? "* You may use mouse click; key 0, 1, 2, 3; or ←, →" : "* Sie können Mausklick; Taste 0, 1, 2, 3; oder ←, → verwenden.");
         }
 
         if (this.typeOfControl === "checkbox") {
-          return "You may use 🖯; key 0, 1, 2, 3, 4; or ←, →";
+          return "You may use 🖱️; key 0, 1, 2, 3, 4; or ←, →";
         }
 
         return "* This option is required";

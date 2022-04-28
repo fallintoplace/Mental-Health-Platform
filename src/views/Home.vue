@@ -5,7 +5,7 @@
       <h2 class="home__title">Patient Health Questionnaire 9 (PHQ-9)</h2>
       <h3>What's your role?</h3>
       <toggle-switch :options="myOptions" v-model="toggle" />
-      <div v-if="toggle == 'Psychiatrist'">
+      <div v-if="toggle == 'Practitioner'">
         <div class="form__group field">
           <input
             type="input"
@@ -19,10 +19,10 @@
           <label for="name" class="form__label">Email</label>
         </div>
 
-        <router-link to="/overviewPatient">
+        <router-link to="/trackPatient">
           <button
             @click="
-              submitForm;
+              // submitForm;
               setEmail(
                 psychiatrist.username ? psychiatrist.username : guestEmail
               );
@@ -33,7 +33,7 @@
         </router-link>
       </div>
 
-      <div v-if="toggle == 'Patient'">
+      <div v-if="toggle == 'User'">
         <div class="form__group field">
           <input
             type="input"
@@ -50,7 +50,7 @@
         <router-link to="/PHQ9">
           <button
             @click="
-              submitForm;
+              // submitForm;
               setEmail(patient.username ? patient.username : guestEmail);
               resetData();
             "
@@ -62,7 +62,7 @@
         <router-link to="/PHQ9">
           <button
             @click="
-              submitForm;
+              // submitForm;
               setEmail(guestEmail);
               resetData();
             "
@@ -142,11 +142,11 @@ export default {
           disabled: false,
           labels: [
             {
-              name: "Psychiatrist",
+              name: "Practitioner",
               color: "black",
               backgroundColor: "turquoise",
             },
-            { name: "Patient", color: "black", backgroundColor: "orange" },
+            { name: "User", color: "black", backgroundColor: "orange" },
           ],
         },
       },

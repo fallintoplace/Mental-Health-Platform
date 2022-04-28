@@ -17,10 +17,8 @@ import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 import "vue-easytable/libs/theme-default/index.css"; // import style
 import VueEasytable from "vue-easytable"; // import library
 
-import VueEllipseProgress from 'vue-ellipse-progress';
+import VueEllipseProgress from "vue-ellipse-progress";
 Vue.use(VueEllipseProgress);
-
-
 
 /* import the fontawesome core */
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -33,6 +31,11 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 /* add icons to the library */
 library.add(faUserSecret);
+
+import VCalendar from "v-calendar";
+Vue.use(VCalendar, {
+  componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
+});
 
 /* add font awesome icon component */
 Vue.component("font-awesome-icon", FontAwesomeIcon);

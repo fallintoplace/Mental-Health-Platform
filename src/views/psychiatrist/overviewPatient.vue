@@ -7,7 +7,7 @@
       @change="refetchData()"
     />
 
-    <h1 class="dashboard__title">Overview Dashboard</h1>
+    <h1 class="dashboard__title">Statistics</h1>
 
     <h2>Filling frequencies of the respondents</h2>
     <div class="box__frequencies">
@@ -97,7 +97,7 @@ import { mapGetters } from "vuex";
 
 export default {
   metaInfo() {
-    let title = "Overview" + " (" + this.toggle + ")";
+    let title = "Statistics" + " (" + this.toggle + ")";
 
     return { title };
   },
@@ -149,11 +149,6 @@ export default {
           hiddenOnCollapse: true,
         },
         {
-          href: "/overviewPatient",
-          title: "Overview Dashboard",
-          icon: "fas fa-users",
-        },
-        {
           href: "/trackPatient",
           title: "Track Patient",
           icon: "fas fa-user",
@@ -162,6 +157,11 @@ export default {
           href: "/comparePatients",
           title: "Compare Patients",
           icon: "fas fa-user-friends",
+        },
+        {
+          href: "/overviewPatient",
+          title: "Statistics",
+          icon: "fas fa-users",
         },
         {
           href: "/",
