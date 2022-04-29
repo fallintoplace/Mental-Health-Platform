@@ -1,7 +1,7 @@
 <template>
   <div class="calendar">
     <sidebar-menu :menu="menu" :width="'15rem'" />
-    <h2 class="h2">Calendars</h2>
+    <h2 class="calendar__title">Calendar</h2>
     <div v-if="data_loaded">
       <div class="calendar__box">
         <vc-calendar
@@ -38,7 +38,7 @@ import { supabase } from "@/supabase/init";
 
 export default {
   metaInfo() {
-    let title = "Calendar";
+    let title = "Calendar: " + new Date().getDate() + "/" + (new Date().getMonth() + 1);
 
     return { title };
   },
@@ -143,6 +143,11 @@ export default {
           hiddenOnCollapse: true,
         },
         {
+          href: "/calendar",
+          title: "Calendar",
+          icon: "far fa-calendar-alt",
+        },
+        {
           href: "/PHQ9",
           title: "Start PHQ9",
           icon: "fas fa-copy",
@@ -151,11 +156,6 @@ export default {
           href: "/GAD7",
           title: "Start GAD7",
           icon: "far fa-copy",
-        },
-        {
-          href: "/calendar",
-          title: "Calendar",
-          icon: "far fa-calendar-alt",
         },
         {
           href: "/profile",
@@ -271,6 +271,9 @@ $weekday-border: 1px solid #eaeaea;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
       rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
       rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  }
+  &__title {
+    color: rgb(74, 57, 124);
   }
 }
 </style>

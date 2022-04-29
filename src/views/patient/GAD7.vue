@@ -68,6 +68,11 @@ export default {
           hiddenOnCollapse: true,
         },
         {
+          href: "/calendar",
+          title: "Calendar",
+          icon: "far fa-calendar-alt",
+        },
+        {
           href: "/PHQ9",
           title: "Start PHQ9",
           icon: "fas fa-copy",
@@ -76,11 +81,6 @@ export default {
           href: "/GAD7",
           title: "Start GAD7",
           icon: "far fa-copy",
-        },
-        {
-          href: "/calendar",
-          title: "Calendar",
-          icon: "far fa-calendar-alt",
         },
         {
           href: "/profile",

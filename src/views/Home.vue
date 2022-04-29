@@ -47,7 +47,7 @@
           <label for="name" class="form__label">Email</label>
         </div>
 
-        <router-link to="/PHQ9">
+        <router-link to="/calendar">
           <button
             @click="
               // submitForm;
@@ -59,7 +59,7 @@
           </button>
         </router-link>
         <h3>Or</h3>
-        <router-link to="/PHQ9">
+        <router-link to="/calendar">
           <button
             @click="
               // submitForm;
