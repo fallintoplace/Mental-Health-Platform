@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <div class="box">
-    <sidebar-menu :menu="menu" :width="'15rem'" />
+    <sidebar-menu :menu="menu" :width="'12rem'" />
       <h2 class="home__title">Personal Information</h2>
-      <div>Email: {{ this.menu[0].title }}</div>
+      <div>Email: {{ getEmail }}</div>
       <br />
       Name: {{ name }} {{ surname }}
       <div class="namebox">
@@ -65,7 +65,7 @@ export default {
     return { title };
   },
   created() {
-    this.menu[0].title = this.getEmail;
+    // this.menu[0].title = this.getEmail;
     this.fetchData();
   },
   data() {

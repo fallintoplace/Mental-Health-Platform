@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <sidebar-menu :menu="menu" :width="'15rem'" />
+    <sidebar-menu :menu="menu" :width="'12rem'" />
 
     <questionnaire-card :value="questionnaire" :number="numberOfQuestions" />
     <footer>
@@ -105,7 +105,7 @@ export default {
   },
 
   created() {
-    this.menu[0].title = this.getEmail;
+    // this.menu[0].title = this.getEmail;
     this.uploadEmail();
     this.toggle = this.getLanguage;
     if (!this.toggle) {

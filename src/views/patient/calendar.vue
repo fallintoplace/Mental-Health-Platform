@@ -1,7 +1,7 @@
 <template>
   <div class="calendar">
-    <sidebar-menu :menu="menu" :width="'15rem'" />
-    <h2 class="calendar__title">Calendar</h2>
+    <sidebar-menu :menu="menu" :width="'12rem'" />
+    <h2 class="calendar__title">Calendar: {{ getEmail }} on {{ todayDate }} </h2>
     <div v-if="data_loaded">
       <div class="calendar__box">
         <vc-calendar
@@ -38,7 +38,7 @@ import { supabase } from "@/supabase/init";
 
 export default {
   metaInfo() {
-    let title = "Calendar: " + new Date().getDate() + "/" + (new Date().getMonth() + 1);
+    let title = "Calendar: " + this.getEmail + " (" + new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear() + ")";
 
     return { title };
   },
@@ -102,11 +102,15 @@ export default {
     },
   },
   created() {
-    this.menu[0].title = this.getEmail;
+    // this.menu[0].title = this.getEmail;
     this.fetchData();
   },
   computed: {
     ...mapGetters(["getEmail"]),
+    todayDate() {
+      let x = new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear();
+      return x;
+    }
   },
   data() {
     const month = new Date().getMonth();

@@ -3,7 +3,7 @@
     <sidebar-menu :menu="menu" :width="'12rem'" />
     <toggle-switch :options="myOptions" v-model="toggle" />
     <h1 class="home__title">Compare Patients</h1>
-    <h2>Score frequencies of Male and Female</h2>
+    <h2>Score frequencies of Male and Female (Normalized)</h2>
     <div>
       <div v-if="toggle === 'PHQ-9'" class="box__gender">
         <template v-if="isLoaded">
@@ -344,6 +344,9 @@ export default {
             {
               ticks: {
                 beginAtZero: true,
+                callback: function (value) {
+                  return (value * 100).toFixed(0) + "%"; // convert it to percentage
+                },
               },
             },
           ],

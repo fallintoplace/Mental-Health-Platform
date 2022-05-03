@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <sidebar-menu :menu="menu" :width="'15rem'" />
+    <sidebar-menu :menu="menu" :width="'12rem'" />
     <vue-ellipse-progress
       :progress="tasksDonePercent"
       :color="gradient"
@@ -95,7 +95,7 @@ export default {
     };
   },
   created() {
-    this.menu[0].title = this.getEmail;
+    // this.menu[0].title = this.getEmail;
     // console.dir(this.getResults);
     var res = this.getResults;
     if (res.length > 0) {
