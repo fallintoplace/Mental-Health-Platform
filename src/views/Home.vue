@@ -5,7 +5,7 @@
       <h2 class="home__title">Patient Health Questionnaire 9 (PHQ-9)</h2>
       <h3>What's your role?</h3>
       <toggle-switch :options="myOptions" v-model="toggle" />
-      <div v-if="toggle == 'Practitioner'">
+      <div v-if="toggle == 'Psychiatrist'">
         <div class="form__group field">
           <input
             type="input"
@@ -142,7 +142,7 @@ export default {
           disabled: false,
           labels: [
             {
-              name: "Practitioner",
+              name: "Psychiatrist",
               color: "black",
               backgroundColor: "turquoise",
             },

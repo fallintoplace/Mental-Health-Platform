@@ -45,7 +45,7 @@ export default {
   methods: {
     async fetchData() {
       let { data: temp, error: _ } = await supabase
-        .from("responses")
+        .from("phq9")
         .select("*")
         .like("email", "%" + this.getEmail + "%");
       if (_) throw _;
@@ -53,8 +53,7 @@ export default {
       this.attributes = [];
 
       for (let i = 0; i < this.phq9_responses.length; i++) {
-        let custom_data = { title: "PHQ-9", class: "class__phq9" };
-        console.log(i);
+        let custom_data = { title: "PHQ-9 ✔️", class: "class__phq9" };
         if (
           i === 0 ||
           (i > 0 &&
@@ -69,14 +68,14 @@ export default {
       }
 
       let { data: _temp, error: __ } = await supabase
-        .from("GAD7")
+        .from("gad7")
         .select("*")
         .like("email", "%" + this.getEmail + "%");
       if (__) throw __;
       this.gad7_responses = _temp;
       for (let i = 0; i < this.gad7_responses.length; i++) {
-        let custom_data = { title: "GAD-7", class: "class__gad7" };
-        console.log(i);
+        let custom_data = { title: "GAD-7 ✔️", class: "class__gad7" };
+        // alert(this.gad7_responses[i].datestamp);
         if (
           i === 0 ||
           (i > 0 &&
@@ -90,10 +89,10 @@ export default {
           });
       }
 
-      let custom_data = { title: "Today", class: "class__today" };
+      let custom_data = { title: "Today 🎯", class: "class__today" };
 
       this.attributes.push({
-        key: 0,
+        key: -1,
         customData: custom_data,
         dates: new Date(),
       });

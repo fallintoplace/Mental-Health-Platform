@@ -345,7 +345,7 @@ export default {
     ...mapMutations(["setTimeForEach"]),
 
     async uploadResponse() {
-      const { data, error } = await supabase.from("responses").insert([
+      const { data, error } = await supabase.from("phq9").insert([
         {
           email: this.getEmail,
           time_completion: this.getTimeCompletion,
@@ -384,6 +384,10 @@ export default {
           t8: this.getTimeForEach[8],
           t9: this.getTimeForEach[9],
           language: this.getLanguage,
+          answer_changes: this.getDecisionChanges,
+          city: this.getCity,
+          operating_system: this.getOperatingSystem,
+          user_agent: this.getUserAgent
         },
       ]);
       console.log(data);

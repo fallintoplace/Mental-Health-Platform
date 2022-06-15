@@ -477,9 +477,7 @@ export default {
       // window.location.reload();
     },
     async fetchFillingFrequencies() {
-      const { data: PHQ9Data, error: PHQ9Error } = await supabase.from(
-        "responses"
-      );
+      const { data: PHQ9Data, error: PHQ9Error } = await supabase.from("phq9");
       // console.log(data);
       // console.log(error);
       let len = PHQ9Data.length;
@@ -501,7 +499,7 @@ export default {
         if (total > 0 && i < 9) this.averageSeries[i] /= total;
       }
 
-      const { data: GAD7Data, error: GAD7Error } = await supabase.from("GAD7");
+      const { data: GAD7Data, error: GAD7Error } = await supabase.from("gad7");
       // console.log(GAD7Data);
       // console.log(error);
       len = GAD7Data.length;
@@ -527,9 +525,7 @@ export default {
       this.loadingAverageScore = true;
     },
     async fetchCountryData() {
-      const { data, error } = await supabase
-        .from("responses")
-        .select("location");
+      const { data, error } = await supabase.from("phq9").select("location");
       // console.log(data);
       // console.log(error);
       const occurrences = data.reduce(function (acc, curr) {
@@ -543,7 +539,7 @@ export default {
       this.loadingCountryData = true;
     },
     async fetchDevice() {
-      const { data, error } = await supabase.from("responses").select("device");
+      const { data, error } = await supabase.from("phq9").select("device");
       // console.log(data);
       // console.log(error);
       for (let i = 0; i < data.length; i++) {

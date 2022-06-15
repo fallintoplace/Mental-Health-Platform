@@ -171,12 +171,12 @@ export default {
       // console.dir(this.patients);
 
       // eslint-disable-next-line no-unused-vars
-      const { data: temp, __ } = await supabase.from("responses").select("*");
+      const { data: temp, __ } = await supabase.from("phq9").select("*");
       this.responses = temp;
       // console.dir(this.responses);
 
       // eslint-disable-next-line no-unused-vars
-      const { data: GAD7_temp, ____ } = await supabase.from("GAD7").select("*");
+      const { data: GAD7_temp, ____ } = await supabase.from("gad7").select("*");
       this.GAD7_responses = GAD7_temp;
       // console.dir(this.responses);
 

@@ -399,11 +399,11 @@ export default {
     async searchResponses(email) {
       this.currentEmail = email;
       const { data: PHQ9Data, error: PHQ9Error } = await supabase
-        .from("responses")
+        .from("phq9")
         .select("*")
         .like("email", "%" + email + "%");
       const { data: GAD7Data, error: GAD7Error } = await supabase
-        .from("GAD7")
+        .from("gad7")
         .select("*")
         .like("email", "%" + email + "%");
       if (PHQ9Error) throw PHQ9Error;

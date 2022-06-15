@@ -323,7 +323,7 @@ export default {
 
 
     async uploadResponse() {
-      const { data, error } = await supabase.from("SUS").insert([
+      const { data, error } = await supabase.from("sus").insert([
         {
           q0: this.getResults[0],
           q1: this.getResults[1],
@@ -335,8 +335,8 @@ export default {
           q7: this.getResults[7],
           q8: this.getResults[8],
           q9: this.getResults[9],
-          datestamp: this.getDatestamp,
-          timestamp: this.getTimestamp,
+          // datestamp: this.getDatestamp,
+          // timestamp: this.getTimestamp,
           total_score: +this.getResults[0] + +this.getResults[2] + +this.getResults[4] + +this.getResults[6] + +this.getResults[8] - this.getResults[1] - this.getResults[3] - this.getResults[5] - this.getResults[7] - this.getResults[9] - 5 + 20,
         },
       ]);
