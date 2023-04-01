@@ -72,7 +72,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { supabase } from "@/supabase/init";
+// import { supabase } from "@/supabase/init";
 import LineChart from "@/components/LineChart";
 
 export default {
@@ -151,7 +151,7 @@ export default {
         if (Map[this.GAD7_responses[i].email] === "Group 3")
           this.gad7_group_datasets[2].data[totalScore]++;
       }
-      sum = { data0: 0, data1: 0, data2: 0  };
+      sum = { data0: 0, data1: 0, data2: 0 };
       for (let i = 0; i < 22; i++) {
         sum.data0 += this.gad7_group_datasets[0].data[i];
         sum.data1 += this.gad7_group_datasets[1].data[i];
@@ -166,19 +166,113 @@ export default {
     },
     async fetchData() {
       // eslint-disable-next-line no-unused-vars
-      const { data, _ } = await supabase.from("patients").select("*");
-      this.patients = data;
-      // console.dir(this.patients);
+      // const { data, _ } = await supabase.from("patients").select("*");
+      // this.patients = data;
+      // // console.dir(this.patients);
+      this.patients = [
+        {
+          email: "a",
+          gender: "Male",
+        },
+        {
+          email: "b",
+          gender: "Female",
+        },
+        {
+          email: "c",
+          gender: "Male",
+        },
+      ];
+      this.GAD7_responses = this.responses = [
+        {
+          email: "a",
+          q0: 0,
+          q1: 0,
+          q2: 1,
+          q3: 0,
+          q4: 0,
+          q5: 0,
+          q6: 0,
+          q7: 0,
+          q8: 0,
+          q9: 0,
+        },
+        {
+          email: "b",
+          q0: 1,
+          q1: 2,
+          q2: 1,
+          q3: 2,
+          q4: 3,
+          q5: 0,
+          q6: 2,
+          q7: 1,
+          q8: 0,
+          q9: 1,
+        },
+        {
+          email: "c",
+          q0: 0,
+          q1: 1,
+          q2: 2,
+          q3: 3,
+          q4: 0,
+          q5: 0,
+          q6: 2,
+          q7: 1,
+          q8: 0,
+          q9: 1,
+        },
+        {
+          email: "a",
+          q0: 0,
+          q1: 0,
+          q2: 1,
+          q3: 0,
+          q4: 0,
+          q5: 3,
+          q6: 2,
+          q7: 0,
+          q8: 1,
+          q9: 0,
+        },
+        {
+          email: "b",
+          q0: 1,
+          q1: 0,
+          q2: 1,
+          q3: 2,
+          q4: 0,
+          q5: 2,
+          q6: 2,
+          q7: 1,
+          q8: 0,
+          q9: 1,
+        },
+        {
+          email: "c",
+          q0: 0,
+          q1: 1,
+          q2: 0,
+          q3: 0,
+          q4: 0,
+          q5: 0,
+          q6: 2,
+          q7: 1,
+          q8: 0,
+          q9: 1,
+        },
+      ];
 
-      // eslint-disable-next-line no-unused-vars
-      const { data: temp, __ } = await supabase.from("phq9").select("*");
-      this.responses = temp;
-      // console.dir(this.responses);
+      // // eslint-disable-next-line no-unused-vars
+      // const { data: temp, __ } = await supabase.from("phq9").select("*");
+      // this.responses = temp;
+      // // console.dir(this.responses);
 
-      // eslint-disable-next-line no-unused-vars
-      const { data: GAD7_temp, ____ } = await supabase.from("gad7").select("*");
-      this.GAD7_responses = GAD7_temp;
-      // console.dir(this.responses);
+      // // eslint-disable-next-line no-unused-vars
+      // const { data: GAD7_temp, ____ } = await supabase.from("gad7").select("*");
+      // this.GAD7_responses = GAD7_temp;
+      // // console.dir(this.responses);
 
       //--------------------------------------
 
@@ -311,7 +405,7 @@ export default {
           noBorder: false,
         },
         size: {
-          fontSize: 1,
+          fontSize: 0.7,
           height: 2,
           padding: 0.3,
           width: 20,
@@ -319,10 +413,10 @@ export default {
         items: {
           delay: 0.4,
           disabled: false,
-          preSelected: "No Group",
+          preSelected: "None",
           labels: [
             {
-              name: "No Group",
+              name: "None",
               color: "black",
               backgroundColor: "lightgrey",
             },
