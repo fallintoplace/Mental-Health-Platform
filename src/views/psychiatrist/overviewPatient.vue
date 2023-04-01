@@ -477,8 +477,87 @@ export default {
       // window.location.reload();
     },
     async fetchFillingFrequencies() {
-      const { data: PHQ9Data, error: PHQ9Error } = await supabase.from("phq9");
-      // console.log(data);
+      // const { data: PHQ9Data, error: PHQ9Error } = await supabase.from("phq9");
+      const PHQ9Data = [
+        {
+          email: "a",
+          q0: 0,
+          q1: 0,
+          q2: 1,
+          q3: 0,
+          q4: 0,
+          q5: 0,
+          q6: 0,
+          q7: 0,
+          q8: 0,
+          q9: 0,
+        },
+        {
+          email: "b",
+          q0: 1,
+          q1: 2,
+          q2: 1,
+          q3: 2,
+          q4: 3,
+          q5: 0,
+          q6: 2,
+          q7: 1,
+          q8: 0,
+          q9: 1,
+        },
+        {
+          email: "c",
+          q0: 0,
+          q1: 1,
+          q2: 2,
+          q3: 3,
+          q4: 0,
+          q5: 0,
+          q6: 2,
+          q7: 1,
+          q8: 0,
+          q9: 1,
+        },
+        {
+          email: "a",
+          q0: 0,
+          q1: 0,
+          q2: 1,
+          q3: 0,
+          q4: 0,
+          q5: 3,
+          q6: 2,
+          q7: 0,
+          q8: 1,
+          q9: 0,
+        },
+        {
+          email: "b",
+          q0: 1,
+          q1: 0,
+          q2: 1,
+          q3: 2,
+          q4: 0,
+          q5: 2,
+          q6: 2,
+          q7: 1,
+          q8: 0,
+          q9: 1,
+        },
+        {
+          email: "c",
+          q0: 0,
+          q1: 1,
+          q2: 0,
+          q3: 0,
+          q4: 0,
+          q5: 0,
+          q6: 2,
+          q7: 1,
+          q8: 0,
+          q9: 1,
+        },
+      ];
       // console.log(error);
       let len = PHQ9Data.length;
       for (let i = 0; i < 10; i++) {
@@ -499,33 +578,47 @@ export default {
         if (total > 0 && i < 9) this.averageSeries[i] /= total;
       }
 
-      const { data: GAD7Data, error: GAD7Error } = await supabase.from("gad7");
-      // console.log(GAD7Data);
-      // console.log(error);
-      len = GAD7Data.length;
-      for (let i = 0; i < 8; i++) {
-        if (i < 7) this.GAD7AverageSeries[i] = 0;
-        total = 0;
-        for (let v = 0; v < 4; v++) {
-          this.GAD7series[3 - v].data[i].y = 0;
-          for (let j = 0; j < len; j++) {
-            if (GAD7Data[j]["q" + i] === v) {
-              this.GAD7series[3 - v].data[i].y++;
-              if (i < 7) {
-                total++;
-                this.GAD7AverageSeries[i] += v;
-              }
-            }
-          }
-        }
-        if (total > 0 && i < 7) this.GAD7AverageSeries[i] /= total;
-      }
+      // const { data: GAD7Data, error: GAD7Error } = await supabase.from("gad7");
+      // // console.log(GAD7Data);
+      // // console.log(error);
+      // len = GAD7Data.length;
+      // for (let i = 0; i < 8; i++) {
+      //   if (i < 7) this.GAD7AverageSeries[i] = 0;
+      //   total = 0;
+      //   for (let v = 0; v < 4; v++) {
+      //     this.GAD7series[3 - v].data[i].y = 0;
+      //     for (let j = 0; j < len; j++) {
+      //       if (GAD7Data[j]["q" + i] === v) {
+      //         this.GAD7series[3 - v].data[i].y++;
+      //         if (i < 7) {
+      //           total++;
+      //           this.GAD7AverageSeries[i] += v;
+      //         }
+      //       }
+      //     }
+      //   }
+      //   if (total > 0 && i < 7) this.GAD7AverageSeries[i] /= total;
+      // }
 
       this.loadingFillingFrequencies = true;
       this.loadingAverageScore = true;
     },
     async fetchCountryData() {
-      const { data, error } = await supabase.from("phq9").select("location");
+      // const { data, error } = await supabase.from("phq9").select("location");
+      const data = [
+        { location: "DE" },
+        { location: "DE" },
+        { location: "DE" },
+        { location: "DE" },
+        { location: "DE" },
+        { location: "DE" },
+        { location: "DE" },
+        { location: "DE" },
+        { location: "DE" },
+        { location: "DE" },
+        { location: "RU" },
+      ];
+
       // console.log(data);
       // console.log(error);
       const occurrences = data.reduce(function (acc, curr) {
@@ -539,7 +632,14 @@ export default {
       this.loadingCountryData = true;
     },
     async fetchDevice() {
-      const { data, error } = await supabase.from("phq9").select("device");
+      // const { data, error } = await supabase.from("phq9").select("device");
+      const data = [
+        { device: "phone" },
+        { device: "phone" },
+        { device: "phone" },
+        { device: "desktop" },
+        { device: "tablet" },
+      ];
       // console.log(data);
       // console.log(error);
       for (let i = 0; i < data.length; i++) {
