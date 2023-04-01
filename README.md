@@ -4,6 +4,7 @@ Digital Platform for Mental Health Issues, in which Patients can self-diagnose, 
 ![1](https://github.com/fallintoplace/Mental-Health-Platform/blob/main/figures/8.png)
 ![2](https://github.com/fallintoplace/Mental-Health-Platform/blob/main/figures/23.png)
 ![2](https://github.com/fallintoplace/Mental-Health-Platform/blob/main/figures/24.png)
+![3](https://github.com/fallintoplace/Mental-Health-Platform/blob/main/figures/35.png)
 ![3](https://github.com/fallintoplace/Mental-Health-Platform/blob/main/figures/18.png)
 ![3](https://github.com/fallintoplace/Mental-Health-Platform/blob/main/figures/19.png)
 ![3](https://github.com/fallintoplace/Mental-Health-Platform/blob/main/figures/21.png)
