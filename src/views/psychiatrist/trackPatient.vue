@@ -53,10 +53,7 @@
           ></line-chart>
         </div>
         <div class="box__table">
-          <ve-table
-            :columns="phq9_columns"
-            :table-data="responses"
-          />
+          <ve-table :columns="phq9_columns" :table-data="responses" />
         </div>
 
         <!-- <div class="box__table">
@@ -93,7 +90,7 @@
 </template>
 
 <script>
-import { supabase } from "@/supabase/init";
+// import { supabase } from "@/supabase/init";
 import { mapGetters } from "vuex";
 import LineChart from "@/components/LineChart";
 
@@ -336,79 +333,193 @@ export default {
   },
   methods: {
     async searchPatient(email, name, surname) {
-      if (email && name && surname) {
-        const { data, error } = await supabase
-          .from("patients")
-          .select("*")
-          .like("email", "%" + email + "%")
-          .like("name", "%" + name + "%")
-          .like("surname", "%" + surname + "%");
-        if (error) throw error;
-        this.patients = data;
-      } else if (email && name) {
-        const { data, error } = await supabase
-          .from("patients")
-          .select("*")
-          .like("email", "%" + email + "%")
-          .like("name", "%" + name + "%");
-        if (error) throw error;
-        this.patients = data;
-      } else if (email && surname) {
-        const { data, error } = await supabase
-          .from("patients")
-          .select("*")
-          .like("email", "%" + email + "%")
-          .like("surname", "%" + surname + "%");
-        if (error) throw error;
-        this.patients = data;
-      } else if (name && surname) {
-        const { data, error } = await supabase
-          .from("patients")
-          .select("*")
-          .like("name", "%" + name + "%")
-          .like("surname", "%" + surname + "%");
-        if (error) throw error;
-        this.patients = data;
-      } else if (email) {
-        const { data, error } = await supabase
-          .from("patients")
-          .select("*")
-          .like("email", "%" + email + "%");
-        if (error) throw error;
-        this.patients = data;
-      } else if (name) {
-        const { data, error } = await supabase
-          .from("patients")
-          .select("*")
-          .like("name", "%" + name + "%");
-        if (error) throw error;
-        this.patients = data;
-      } else if (surname) {
-        const { data, error } = await supabase
-          .from("patients")
-          .select("*")
-          .like("surname", "%" + surname + "%");
-        if (error) throw error;
-        this.patients = data;
-      } else {
-        const { data, error } = await supabase.from("patients").select("*");
-        if (error) throw error;
-        this.patients = data;
-      }
+      console.log(email, name, surname);
+      this.patients = [
+        {
+          email: "a@tum.de",
+          gender: "Male",
+        },
+        {
+          email: "b@tum.de",
+          gender: "Female",
+        },
+        {
+          email: "c@tum.de",
+          gender: "Male",
+        },
+      ];
+      // if (email && name && surname) {
+      //   const { data, error } = await supabase
+      //     .from("patients")
+      //     .select("*")
+      //     .like("email", "%" + email + "%")
+      //     .like("name", "%" + name + "%")
+      //     .like("surname", "%" + surname + "%");
+      //   if (error) throw error;
+      //   this.patients = data;
+      // } else if (email && name) {
+      //   const { data, error } = await supabase
+      //     .from("patients")
+      //     .select("*")
+      //     .like("email", "%" + email + "%")
+      //     .like("name", "%" + name + "%");
+      //   if (error) throw error;
+      //   this.patients = data;
+      // } else if (email && surname) {
+      //   const { data, error } = await supabase
+      //     .from("patients")
+      //     .select("*")
+      //     .like("email", "%" + email + "%")
+      //     .like("surname", "%" + surname + "%");
+      //   if (error) throw error;
+      //   this.patients = data;
+      // } else if (name && surname) {
+      //   const { data, error } = await supabase
+      //     .from("patients")
+      //     .select("*")
+      //     .like("name", "%" + name + "%")
+      //     .like("surname", "%" + surname + "%");
+      //   if (error) throw error;
+      //   this.patients = data;
+      // } else if (email) {
+      //   const { data, error } = await supabase
+      //     .from("patients")
+      //     .select("*")
+      //     .like("email", "%" + email + "%");
+      //   if (error) throw error;
+      //   this.patients = data;
+      // } else if (name) {
+      //   const { data, error } = await supabase
+      //     .from("patients")
+      //     .select("*")
+      //     .like("name", "%" + name + "%");
+      //   if (error) throw error;
+      //   this.patients = data;
+      // } else if (surname) {
+      //   const { data, error } = await supabase
+      //     .from("patients")
+      //     .select("*")
+      //     .like("surname", "%" + surname + "%");
+      //   if (error) throw error;
+      //   this.patients = data;
+      // } else {
+      //   const { data, error } = await supabase.from("patients").select("*");
+      //   if (error) throw error;
+      //   this.patients = data;
+      // }
     },
     async searchResponses(email) {
       this.currentEmail = email;
-      const { data: PHQ9Data, error: PHQ9Error } = await supabase
-        .from("phq9")
-        .select("*")
-        .like("email", "%" + email + "%");
-      const { data: GAD7Data, error: GAD7Error } = await supabase
-        .from("gad7")
-        .select("*")
-        .like("email", "%" + email + "%");
-      if (PHQ9Error) throw PHQ9Error;
-      if (GAD7Error) throw GAD7Error;
-      this.responses = PHQ9Data;
+      // const { data: PHQ9Data, error: PHQ9Error } = await supabase
+      //   .from("phq9")
+      //   .select("*")
+      //   .like("email", "%" + email + "%");
+      // const { data: GAD7Data, error: GAD7Error } = await supabase
+      //   .from("gad7")
+      //   .select("*")
+      //   .like("email", "%" + email + "%");
+      // if (PHQ9Error) throw PHQ9Error;
+      // if (GAD7Error) throw GAD7Error;
+
+      this.responses = [
+        {
+          email: "a",
+          q0: 0,
+          q1: 0,
+          q2: 1,
+          q3: 0,
+          q4: 0,
+          q5: 0,
+          q6: 0,
+          q7: 0,
+          q8: 0,
+          q9: 0,
+          time_completion: 3,
+          total_score: 3,
+
+        },
+        {
+          email: "b",
+          q0: 1,
+          q1: 2,
+          q2: 1,
+          q3: 2,
+          q4: 3,
+          q5: 0,
+          q6: 2,
+          q7: 1,
+          q8: 0,
+          q9: 1,
+          time_completion: 3,
+          total_score: 10,
+
+        },
+        {
+          email: "c",
+          q0: 0,
+          q1: 1,
+          q2: 2,
+          q3: 3,
+          q4: 0,
+          q5: 0,
+          q6: 2,
+          q7: 1,
+          q8: 0,
+          q9: 1,
+          time_completion: 3,
+          total_score: 8,
+
+        },
+        {
+          email: "a",
+          q0: 0,
+          q1: 0,
+          q2: 1,
+          q3: 0,
+          q4: 0,
+          q5: 3,
+          q6: 2,
+          q7: 0,
+          q8: 1,
+          q9: 0,
+          time_completion: 3,
+          total_score: 7,
+
+        },
+        {
+          email: "b",
+          q0: 1,
+          q1: 0,
+          q2: 1,
+          q3: 2,
+          q4: 0,
+          q5: 2,
+          q6: 2,
+          q7: 1,
+          q8: 0,
+          q9: 1,
+          time_completion: 3,
+          total_score: 12,
+
+        },
+        {
+          email: "c",
+          q0: 0,
+          q1: 1,
+          q2: 0,
+          q3: 0,
+          q4: 0,
+          q5: 0,
+          q6: 2,
+          q7: 1,
+          q8: 0,
+          q9: 1,
+          time_completion: 3,
+          total_score: 8,
+
+        },
+      ];
+      const GAD7Data = this.responses;
       this.labels.length = 0;
       this.datasets[0].data.length = 0;
       this.datasets1[0].data.length = 0;
