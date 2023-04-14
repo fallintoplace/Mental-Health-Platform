@@ -1,7 +1,7 @@
 <template>
   <div class="calendar">
     <sidebar-menu :menu="menu" :width="'12rem'" />
-    <h2 class="calendar__title">Calendar: {{ getEmail }} on {{ todayDate }} </h2>
+    <h2 class="calendar__title">Calendar: {{ getEmail }} on {{ todayDate }}</h2>
     <div v-if="data_loaded">
       <div class="calendar__box">
         <vc-calendar
@@ -34,21 +34,31 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { supabase } from "@/supabase/init";
+// import { supabase } from "@/supabase/init";
 
 export default {
   metaInfo() {
-    let title = "Calendar: " + this.getEmail + " (" + new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear() + ")";
+    let title =
+      "Calendar: " +
+      this.getEmail +
+      " (" +
+      new Date().getDate() +
+      "/" +
+      (new Date().getMonth() + 1) +
+      "/" +
+      new Date().getFullYear() +
+      ")";
 
     return { title };
   },
   methods: {
     async fetchData() {
-      let { data: temp, error: _ } = await supabase
-        .from("phq9")
-        .select("*")
-        .like("email", "%" + this.getEmail + "%");
-      if (_) throw _;
+      // let { data: temp, error: _ } = await supabase
+      //   .from("phq9")
+      //   .select("*")
+      //   .like("email", "%" + this.getEmail + "%");
+      let temp = [];
+      // if (_) throw _;
       this.phq9_responses = temp;
       this.attributes = [];
 
@@ -67,11 +77,13 @@ export default {
           });
       }
 
-      let { data: _temp, error: __ } = await supabase
-        .from("gad7")
-        .select("*")
-        .like("email", "%" + this.getEmail + "%");
-      if (__) throw __;
+      // let { data: _temp, error: __ } = await supabase
+      //   .from("gad7")
+      //   .select("*")
+      //   .like("email", "%" + this.getEmail + "%");
+      // if (__) throw __;
+      let _temp = [];
+
       this.gad7_responses = _temp;
       for (let i = 0; i < this.gad7_responses.length; i++) {
         let custom_data = { title: "GAD-7 ✔️", class: "class__gad7" };
@@ -107,9 +119,14 @@ export default {
   computed: {
     ...mapGetters(["getEmail"]),
     todayDate() {
-      let x = new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear();
+      let x =
+        new Date().getDate() +
+        "/" +
+        (new Date().getMonth() + 1) +
+        "/" +
+        new Date().getFullYear();
       return x;
-    }
+    },
   },
   data() {
     const month = new Date().getMonth();
