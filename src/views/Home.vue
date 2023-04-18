@@ -19,7 +19,7 @@
           <label for="name" class="form__label">Email</label>
         </div>
 
-        <router-link to="/trackPatient">
+        <router-link to="/overviewPatient">
           <button
             @click="
               // submitForm;
